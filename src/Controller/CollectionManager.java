@@ -1,15 +1,10 @@
 package Controller;
 
 import Model.MusicBand;
-import Model.MusicGenre;
-import View.ConsoleView;
 
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
-
-import static java.lang.Math.max;
-
 public class CollectionManager {
     private ArrayDeque<MusicBand> deque = new ArrayDeque<>();
     private final IdGenerator idGen = new IdGenerator(0);

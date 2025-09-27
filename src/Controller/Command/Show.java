@@ -2,7 +2,6 @@ package Controller.Command;
 
 import Controller.CollectionManager;
 import Controller.CommandResponse;
-import Model.MusicBand;
 import View.ConsoleView;
 
 public class Show extends Command {
