@@ -18,7 +18,7 @@ public class Main {
         Path dataFilePath = Paths.get(System.getenv(envName));
 
 
-        ConsoleView consoleView = new ConsoleView(System.out, System.err);
+        ConsoleView consoleView = new ConsoleView(System.out);
         CollectionManager collectionManager = new CollectionManager();
         FileManager fileManager = new FileManager(dataFilePath, collectionManager, consoleView);
         ElementBuilder elementBuilder = new ElementBuilder(consoleView, StdInSource.INSTANCE, collectionManager.getIdGenerator());
