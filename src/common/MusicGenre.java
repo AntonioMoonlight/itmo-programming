@@ -9,5 +9,5 @@ public enum MusicGenre implements Comparable<MusicGenre>, Serializable {
     SOUL,
     MATH_ROCK;
 
-    public static String allowed = Arrays.toString(values());
+    public final static String allowed = Arrays.toString(values());
 }

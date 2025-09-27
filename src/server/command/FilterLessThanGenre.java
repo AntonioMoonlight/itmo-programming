@@ -9,8 +9,8 @@ import java.util.ArrayDeque;
 import java.util.stream.Collectors;
 
 public class FilterLessThanGenre extends Command {
-    private CollectionManager collectionManager;
-    private ConsoleView consoleView;
+    private final CollectionManager collectionManager;
+    private final ConsoleView consoleView;
 
     public FilterLessThanGenre(CollectionManager collectionManager, ConsoleView consoleView) {
         super("filter_less_than_genre", "Shows all elements with field genre less than the given one,",

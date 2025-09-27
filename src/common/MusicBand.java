@@ -15,13 +15,13 @@ import static client.MusicBandValidator.labelNameNotNull;
 
 public class MusicBand implements Comparable<MusicBand>, Serializable {
     private int id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
-    private String name; //Поле не может быть null, Строка не может быть пустой
-    private Coordinates coordinates; //Поле не может быть null
-    private LocalDateTime creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
-    private int numberOfParticipants; //Значение поля должно быть больше 0
-    private Date establishmentDate; //Поле может быть null
-    private MusicGenre genre; //Поле не может быть null
-    private Label label; //Поле не может быть null
+    private final String name; //Поле не может быть null, Строка не может быть пустой
+    private final Coordinates coordinates; //Поле не может быть null
+    private final LocalDateTime creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
+    private final int numberOfParticipants; //Значение поля должно быть больше 0
+    private final Date establishmentDate; //Поле может быть null
+    private final MusicGenre genre; //Поле не может быть null
+    private final Label label; //Поле не может быть null
 
     public MusicBand(int id, String name, Coordinates coordinates, LocalDateTime creationDate, int numberOfParticipants,
                      Date establishmentDate, MusicGenre genre, Label label) {
@@ -54,60 +54,24 @@ public class MusicBand implements Comparable<MusicBand>, Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public Coordinates getCoordinates() {
         return coordinates;
-    }
-
-    public void setCoordinates(Coordinates coordinates) {
-        this.coordinates = coordinates;
     }
 
     public LocalDateTime getCreationDate() {
         return creationDate;
     }
 
-    public void setCreationDate(LocalDateTime creationDate) {
-        this.creationDate = creationDate;
-    }
-
     public int getNumberOfParticipants() {
         return numberOfParticipants;
-    }
-
-    public void setNumberOfParticipants(int numberOfParticipants) {
-        this.numberOfParticipants = numberOfParticipants;
-    }
-
-    public Date getEstablishmentDate() {
-        return establishmentDate;
-    }
-
-    public void setEstablishmentDate(Date establishmentDate) {
-        this.establishmentDate = establishmentDate;
     }
 
     public MusicGenre getGenre() {
         return genre;
     }
 
-    public void setGenre(MusicGenre genre) {
-        this.genre = genre;
-    }
-
     public Label getLabel() {
         return label;
-    }
-
-    public void setLabel(Label label) {
-        this.label = label;
     }
 
     @Override

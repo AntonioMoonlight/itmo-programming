@@ -40,9 +40,8 @@ public class Main {
         commandManager.register(new CountByLabel(collectionManager, consoleView));
         commandManager.register(new FilterLessThanGenre(collectionManager, consoleView));
         commandManager.register(new Info(consoleView, collectionManager));
-        commandManager.register(new Save(fileManager, consoleView));
-        commandManager.register(new ExecuteScript(consoleView, commandManager, elementBuilder, appController));
-        commandManager.register(new ExecuteScript(consoleView, commandManager, elementBuilder, appController));
+        commandManager.register(new Save(fileManager));
+        commandManager.register(new ExecuteScript(appController));
 
         List<String> messages = collectionManager.init(fileManager.readCollection());
         messages.forEach(consoleView::println);

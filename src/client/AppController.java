@@ -15,7 +15,7 @@ public class AppController {
     private final ConsoleView consoleView;
     private final CommandManager commandManager;
 
-    private Set<String> activeScripts = new HashSet<>();
+    private final Set<String> activeScripts = new HashSet<>();
 
     private record ParsedCommand(String name, String[] args) {}
 

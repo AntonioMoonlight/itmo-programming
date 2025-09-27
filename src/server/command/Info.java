@@ -20,12 +20,11 @@ public class Info extends Command {
     public CommandResponse execute(String[] args) {
         String formattedDate = collectionManager.getInitDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
 
-        StringBuilder sb = new StringBuilder(
-                "Information about the collection:").append("\n")
-                .append("Type: ArrayDeque").append("\n")
-                .append("Initialization date: ").append(formattedDate).append("\n")
-                .append("Number of elements: ").append(collectionManager.getDeque().size()).append("\n");
-        consoleView.println(sb.toString());
+        String sb = "Information about the collection:" + "\n" +
+                "Type: ArrayDeque" + "\n" +
+                "Initialization date: " + formattedDate + "\n" +
+                "Number of elements: " + collectionManager.getDeque().size() + "\n";
+        consoleView.println(sb);
         return CommandResponse.success();
     }
 }

@@ -14,17 +14,10 @@ public class IdGenerator {
         band.setId(id);
     }
 
-    public void assignNextId(MusicBand band) {
-        this.assignId(next(), band);
-    }
-
     public int next() {
         return ++counter;
     }
 
-    public int getCounter() {
-        return counter;
-    }
     public void setCounter(int counter) {
         this.counter = counter;
     }

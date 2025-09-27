@@ -17,11 +17,13 @@ public class Head extends Command {
 
     @Override
     public CommandResponse execute(String[] args) throws ElementBuilder.NoMoreInputException {
-        if (collectionManager.getDeque().isEmpty()) {
+        var firstElement = collectionManager.getDeque().peekFirst();
+
+        if (firstElement == null) {
             return CommandResponse.failure("The collection is empty.");
         }
 
-        consoleView.printMusicBandTable(collectionManager.getDeque().peekFirst());
+        consoleView.printMusicBandTable(firstElement);
         return CommandResponse.success();
     }
 }

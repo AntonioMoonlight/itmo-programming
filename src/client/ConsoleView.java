@@ -29,11 +29,6 @@ public class ConsoleView {
     }
     public void println(String s) {out.println(s);}
     public void print(String s) {out.print(s);}
-    public void error(String s) {err.println(s);}
-
-    public void flush() {
-        out.flush();
-    }
 
     public void prompt(String s) {
         println("Enter " + s);
