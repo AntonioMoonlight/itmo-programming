@@ -3,8 +3,6 @@ package server.command;
 import server.CommandResponse;
 import client.ElementBuilder;
 import server.FileManager;
-import client.ConsoleView;
-
 import java.io.FileNotFoundException;
 
 public class Save extends Command {

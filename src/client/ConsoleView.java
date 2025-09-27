@@ -7,8 +7,6 @@ import java.util.ArrayDeque;
 
 public class ConsoleView {
     private final PrintStream out;
-    private final PrintStream err;
-
     private final String hLine = "+"
             + "-".repeat(6)  + "+"
             + "-".repeat(22) + "+"
@@ -23,9 +21,8 @@ public class ConsoleView {
 
     private final String PROMPT = ">";
 
-    public ConsoleView(PrintStream out, PrintStream err) {
+    public ConsoleView(PrintStream out) {
         this.out = out;
-        this.err = err;
     }
     public void println(String s) {out.println(s);}
     public void print(String s) {out.print(s);}
