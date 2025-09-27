@@ -3,7 +3,7 @@ package Controller.Command;
 import Controller.CollectionManager;
 import Controller.CommandResponse;
 import Controller.ElementBuilder;
-import Model.MusicBand;
+import common.MusicBand;
 import View.ConsoleView;
 
 public class SumOfNumberOfParticipants extends Command {

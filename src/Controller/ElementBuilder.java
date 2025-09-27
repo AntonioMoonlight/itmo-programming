@@ -1,7 +1,10 @@
 package Controller;
 
-import Model.*;
 import View.*;
+import common.Coordinates;
+import common.Label;
+import common.MusicBand;
+import common.MusicGenre;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

@@ -3,9 +3,7 @@ package Controller.Command;
 import Controller.CollectionManager;
 import Controller.CommandResponse;
 import Controller.ElementBuilder;
-import Model.MusicBand;
-
-import java.util.stream.Collectors;
+import common.MusicBand;
 
 public class RemoveLower extends Command {
     private final CollectionManager collectionManager;

@@ -1,4 +1,4 @@
-package Model;
+package common;
 
 public class Coordinates {
     public Double getX() {

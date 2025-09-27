@@ -1,6 +1,6 @@
 package Controller;
 
-import Model.MusicBand;
+import common.MusicBand;
 
 public class IdGenerator {
 

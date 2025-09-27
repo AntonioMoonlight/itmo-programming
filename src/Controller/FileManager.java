@@ -4,7 +4,7 @@ import Controller.JsonAdapters.DateAdapter;
 import Controller.JsonAdapters.LocalDateTimeAdapter;
 import View.ConsoleView;
 import com.google.gson.Gson;
-import Model.MusicBand;
+import common.MusicBand;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;

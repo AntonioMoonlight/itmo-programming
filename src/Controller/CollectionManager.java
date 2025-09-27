@@ -1,6 +1,6 @@
 package Controller;
 
-import Model.MusicBand;
+import common.MusicBand;
 
 import java.time.LocalDateTime;
 import java.util.*;

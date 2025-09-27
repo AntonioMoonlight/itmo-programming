@@ -3,11 +3,7 @@ package Controller.Command;
 import Controller.CollectionManager;
 import Controller.CommandResponse;
 import Controller.ElementBuilder;
-import  Model.MusicBand;
 import View.ConsoleView;
-
-import java.util.NoSuchElementException;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 public class Head extends Command {
 

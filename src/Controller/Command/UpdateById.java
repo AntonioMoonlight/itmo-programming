@@ -3,7 +3,7 @@ package Controller.Command;
 import Controller.CollectionManager;
 import Controller.CommandResponse;
 import Controller.ElementBuilder;
-import Model.MusicBand;
+import common.MusicBand;
 
 public class UpdateById extends  Command {
     private final CollectionManager collectionManager;

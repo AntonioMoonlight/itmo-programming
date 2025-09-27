@@ -1,6 +1,6 @@
 package View;
 
-import Model.MusicBand;
+import common.MusicBand;
 
 import java.io.PrintStream;
 import java.util.ArrayDeque;

@@ -1,6 +1,6 @@
 package Controller;
 
-import Model.MusicBand;
+import common.MusicBand;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
