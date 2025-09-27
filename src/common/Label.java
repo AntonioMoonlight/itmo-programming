@@ -1,6 +1,8 @@
 package common;
 
-public class Label {
+import java.io.Serializable;
+
+public class Label implements Serializable {
     private final String name;
     private final Integer bands; //Поле может быть null
     public Label(String name, Integer bands) {

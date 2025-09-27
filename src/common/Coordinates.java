@@ -1,6 +1,8 @@
 package common;
 
-public class Coordinates {
+import java.io.Serializable;
+
+public class Coordinates implements Serializable {
     public Double getX() {
         return x;
     }

@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/proglab5.iml" filepath="$PROJECT_DIR$/proglab5.iml" />
+      <module fileurl="file://$PROJECT_DIR$/itmo-programming.iml" filepath="$PROJECT_DIR$/itmo-programming.iml" />
     </modules>
   </component>
 </project>

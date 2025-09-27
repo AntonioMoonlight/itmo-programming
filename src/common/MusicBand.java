@@ -1,7 +1,8 @@
 package common;
 
-import Controller.MusicBandValidator;
+import client.MusicBandValidator;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -9,10 +10,10 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.Objects;
 
-import static Controller.MusicBandValidator.*;
-import static Controller.MusicBandValidator.labelNameNotNull;
+import static client.MusicBandValidator.*;
+import static client.MusicBandValidator.labelNameNotNull;
 
-public class MusicBand implements Comparable<MusicBand> {
+public class MusicBand implements Comparable<MusicBand>, Serializable {
     private int id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name; //Поле не может быть null, Строка не может быть пустой
     private Coordinates coordinates; //Поле не может быть null

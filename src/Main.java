@@ -1,6 +1,11 @@
-import Controller.*;
-import Controller.Command.*;
-import View.*;
+import client.AppController;
+import client.ConsoleView;
+import client.ElementBuilder;
+import client.StdInSource;
+import server.CollectionManager;
+import server.CommandManager;
+import server.FileManager;
+import server.command.*;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
