@@ -11,31 +11,32 @@ import com.google.gson.reflect.TypeToken;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.util.ArrayDeque;
 import java.util.Date;
 
 public class FileManager {
-    private final String FILE_PATH;
+    private final Path filePath;
     private final CollectionManager collectionManager;
     private final ConsoleView consoleView;
 
-    private final TypeToken<ArrayDeque<MusicBand>> collectionType = new TypeToken<ArrayDeque<MusicBand>>(){};
+    private final TypeToken<ArrayDeque<MusicBand>> collectionType = new TypeToken<>(){};
 
     Gson gson = new GsonBuilder()
             .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeAdapter())
             .registerTypeAdapter(Date.class, new DateAdapter())
             .setPrettyPrinting()
             .create();
-    public FileManager(String FILE_PATH, CollectionManager collectionManager, ConsoleView consoleView) {
-        this.FILE_PATH = FILE_PATH;
+    public FileManager(Path filePath, CollectionManager collectionManager, ConsoleView consoleView) {
+        this.filePath = filePath;
         this.collectionManager = collectionManager;
         this.consoleView = consoleView;
     }
 
     public void writeCollection() throws FileNotFoundException {
         ArrayDeque<MusicBand> deque = collectionManager.getDeque();
-        try (FileOutputStream outputStream = new FileOutputStream(FILE_PATH)) {
+        try (FileOutputStream outputStream = new FileOutputStream(String.valueOf(filePath))) {
             byte[] bytes = gson.toJson(deque).getBytes();
             outputStream.write(bytes);
             outputStream.flush();
@@ -46,7 +47,7 @@ public class FileManager {
 
     public ArrayDeque<MusicBand> readCollection() {
         StringBuilder sb = new StringBuilder();
-        try (InputStreamReader inputReader = new InputStreamReader(new FileInputStream(FILE_PATH), StandardCharsets.UTF_8)) {
+        try (InputStreamReader inputReader = new InputStreamReader(new FileInputStream(String.valueOf(filePath)), StandardCharsets.UTF_8)) {
             char[] buffer = new char[1024];
             int numCharsRead;
 

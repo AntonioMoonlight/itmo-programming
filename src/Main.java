@@ -2,15 +2,20 @@ import Controller.*;
 import Controller.Command.*;
 import View.*;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
 
-        String path = System.getenv("DATA_FILE");
+        String envName = "DATA_FILE";
+        Path dataFilePath = Paths.get(System.getenv(envName));
+
+
         ConsoleView consoleView = new ConsoleView(System.out, System.err);
         CollectionManager collectionManager = new CollectionManager();
-        FileManager fileManager = new FileManager(path, collectionManager, consoleView);
+        FileManager fileManager = new FileManager(dataFilePath, collectionManager, consoleView);
         ElementBuilder elementBuilder = new ElementBuilder(consoleView, StdInSource.INSTANCE, collectionManager.getIdGenerator());
         CommandManager commandManager = new CommandManager();
         AppController appController = new AppController(StdInSource.INSTANCE, elementBuilder,
