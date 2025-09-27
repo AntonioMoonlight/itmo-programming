@@ -1,0 +1,32 @@
+[
+  {
+    "id": 2,
+    "name": "Null Pointers",
+    "coordinates": {
+      "x": 3.0,
+      "y": -5
+    },
+    "creationDate": "2025-09-17 00:14",
+    "numberOfParticipants": 4,
+    "genre": "MATH_ROCK",
+    "label": {
+      "name": "BugFix_Inc."
+    }
+  },
+  {
+    "id": 3,
+    "name": "Soul Overflow",
+    "coordinates": {
+      "x": 99.9,
+      "y": 0
+    },
+    "creationDate": "2025-09-17 00:14",
+    "numberOfParticipants": 7,
+    "establishmentDate": "2010-07-30",
+    "genre": "SOUL",
+    "label": {
+      "name": "Heap_Beats",
+      "bands": 25
+    }
+  }
+]
