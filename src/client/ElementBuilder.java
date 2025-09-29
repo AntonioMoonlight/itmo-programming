@@ -25,11 +25,9 @@ public class ElementBuilder {
 
     private InputSource inputSource;
 
-    private final IdGenerator idGenerator;
-    public ElementBuilder(ConsoleView consoleView, InputSource inputSource, IdGenerator idGenerator) {
+    public ElementBuilder(ConsoleView consoleView, InputSource inputSource) {
         this.consoleView = consoleView;
         this.inputSource = inputSource;
-        this.idGenerator = idGenerator;
     }
 
 
@@ -74,7 +72,8 @@ public class ElementBuilder {
         MusicGenre genre = buildGenre();
 
         Label label = buildLabel();
-        return new MusicBand(idGenerator.next(),
+        // TODO: Send request for creating the object on server side.
+        return new MusicBand(0,
                 name,
                 coordinates,
                 creationDate,

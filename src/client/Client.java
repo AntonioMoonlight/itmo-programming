@@ -1,20 +1,19 @@
 package client;
 
-import java.io.IOException;
-import java.net.Socket;
+import server.*;
 
 public class Client {
     public static void main(String[] args) {
         String host = "localhost";
         int port = 8080;
+        String envName = "DATA_FILE";
 
-        try {
-            System.out.println("Connecting to the server...");
-            Socket socket = new Socket(host, port);
-            System.out.println("Connection successful.");
-            socket.close();
-        } catch (IOException e) {
-            System.err.println("Connection to the server failed.");
-        }
+        ConsoleView consoleView = new ConsoleView(System.out);
+        ElementBuilder elementBuilder = new ElementBuilder(consoleView, StdInSource.INSTANCE);
+        CommandManager commandManager = new CommandManager();
+        AppController appController = new AppController(StdInSource.INSTANCE, elementBuilder,
+                consoleView, commandManager);
+
+        appController.run();
     }
 }

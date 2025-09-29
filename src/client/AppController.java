@@ -19,7 +19,8 @@ public class AppController {
 
     private record ParsedCommand(String name, String[] args) {}
 
-    public AppController(InputSource inputSource, ElementBuilder elementBuilder, ConsoleView consoleView, CommandManager commandManager) {
+    public AppController(InputSource inputSource, ElementBuilder elementBuilder,
+                         ConsoleView consoleView, CommandManager commandManager) {
         this.inputSource = inputSource;
         this.elementBuilder = elementBuilder;
         this.consoleView = consoleView;
@@ -37,13 +38,13 @@ public class AppController {
             String line = optLine.get().trim();
             if (line.isEmpty()) continue;
 
-            proccessLine(line);
+            processLine(line);
             if (inputSource.isInteractive()) consoleView.prompt();
 
          }
     }
 
-    private void proccessLine(String line) {
+    private void processLine(String line) {
         ParsedCommand parsedCommand = parse(line);
         Command command = commandManager.getRegistry().get(parsedCommand.name);
         if (command == null) {
