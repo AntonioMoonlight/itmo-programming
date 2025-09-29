@@ -1,10 +1,9 @@
-package client;
+package common;
 
-import common.MusicBand;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import static client.MusicBandValidator.*;
+import static common.MusicBandValidator.*;
 public interface MusicBandValidator extends Function<MusicBand, ValidationResult> {
 
     default MusicBandValidator andCollect(MusicBandValidator other) {

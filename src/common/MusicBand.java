@@ -1,7 +1,5 @@
 package common;
 
-import client.MusicBandValidator;
-
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
@@ -10,8 +8,8 @@ import java.util.Comparator;
 import java.util.Date;
 import java.util.Objects;
 
-import static client.MusicBandValidator.*;
-import static client.MusicBandValidator.labelNameNotNull;
+import static common.MusicBandValidator.*;
+import static common.MusicBandValidator.labelNameNotNull;
 
 public class MusicBand implements Comparable<MusicBand>, Serializable {
     private int id; //Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически

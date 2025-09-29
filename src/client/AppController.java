@@ -63,7 +63,8 @@ public class AppController {
         if (detectRecursion(fileName)) {
             return;
         }
-        try {processCommand(command, args);
+        try {
+            processCommand(command, args);
         } finally {
             activeScripts.remove(fileName);
             elementBuilder.setInputSource(StdInSource.INSTANCE);

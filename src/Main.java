@@ -5,8 +5,10 @@ import client.StdInSource;
 import server.CollectionManager;
 import server.CommandManager;
 import server.FileManager;
+import server.Server;
 import server.command.*;
 
+import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
@@ -14,7 +16,11 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
 
-        String envName = "DATA_FILE";
+        int port = 8080;
+        Server server = new Server(port);
+        server.start();
+
+        /*String envName = "DATA_FILE";
         Path dataFilePath = Paths.get(System.getenv(envName));
 
 
@@ -45,6 +51,6 @@ public class Main {
 
         List<String> messages = collectionManager.init(fileManager.readCollection());
         messages.forEach(consoleView::println);
-        appController.run();
+        appController.run();*/
     }
 }

@@ -4,18 +4,18 @@ import java.io.Serializable;
 
 public class Request implements Serializable {
     private final String commandName;
-    private final Serializable argument;
+    private final Serializable args;
 
-    public Request(String commandName, Serializable argument) {
+    public Request(String commandName, Serializable args) {
         this.commandName = commandName;
-        this.argument = argument;
+        this.args = args;
     }
 
     public String getCommandName() {
         return commandName;
     }
 
-    public Serializable getArgument() {
-        return argument;
+    public Serializable getArgs() {
+        return args;
     }
 }
