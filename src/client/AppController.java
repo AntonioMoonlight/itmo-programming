@@ -10,84 +10,65 @@ import java.util.Set;
 
 public class AppController {
 
-    private InputSource inputSource;
     private final ElementBuilder elementBuilder;
     private final ConsoleView consoleView;
     private final CommandManager commandManager;
-
     private final Set<String> activeScripts = new HashSet<>();
-
+    private boolean isRunning = true;
     private record ParsedCommand(String name, String[] args) {}
 
-    public AppController(InputSource inputSource, ElementBuilder elementBuilder,
+    public AppController(ElementBuilder elementBuilder,
                          ConsoleView consoleView, CommandManager commandManager) {
-        this.inputSource = inputSource;
         this.elementBuilder = elementBuilder;
         this.consoleView = consoleView;
         this.commandManager = commandManager;
     }
 
-    public void run() {
-        if (!inputSource.isInteractive()) elementBuilder.setInputSource(inputSource);
-        else consoleView.prompt();
+    public void run(InputSource inputSource) {
+        if (!inputSource.isInteractive()) {
+            elementBuilder.setInputSource(inputSource);
+        }
 
-        while (true) {
-            Optional<String> optLine = inputSource.nextLine();
-            if (optLine.isEmpty()) break;
-
-            String line = optLine.get().trim();
-            if (line.isEmpty()) continue;
-
-            processLine(line);
+        while (isRunning) {
             if (inputSource.isInteractive()) consoleView.prompt();
 
-         }
+            Optional<String> optLine = inputSource.nextLine();
+            if (optLine.isEmpty()) {
+                if (!inputSource.isInteractive()) {
+                    inputSource = StdInSource.INSTANCE;
+                    continue;
+                }
+                break;
+            }
+
+            String line = optLine.get().trim();
+            if (!line.isEmpty()) {
+                processLine(line);
+            }
+        }
     }
 
-    private void processLine(String line) {
+    public void processLine(String line) {
         ParsedCommand parsedCommand = parse(line);
         Command command = commandManager.getRegistry().get(parsedCommand.name);
         if (command == null) {
             consoleView.println("Unknown command: " + parsedCommand.name);
             return;
         }
-        if ("execute_script".equals(parsedCommand.name)) {
-            processScript(command, parsedCommand.args);
-        } else {
-            processCommand(command, parsedCommand.args);
-        }
-    }
-    private void processScript(Command command, String[] args) {
-        command.validateArgCount(args, 1);
-        String fileName = args[0];
-
-        if (detectRecursion(fileName)) {
-            return;
-        }
-        try {
-            processCommand(command, args);
-        } finally {
-            activeScripts.remove(fileName);
-            elementBuilder.setInputSource(StdInSource.INSTANCE);
-        }
+        processCommand(command, parsedCommand.args());
     }
     private void processCommand(Command command, String[] args) {
         try {
             CommandResponse response = command.validateAndExecute(args);
+            if (!isRunning) return;
+
             commandManager.getHistory().addFirst(command.getName());
             handleResponse(response);
         } catch (ElementBuilder.NoMoreInputException e) {
             consoleView.println("Input not available.");
+        } catch (Exception e) {
+            consoleView.println("Execution error.");
         }
-    }
-
-    private boolean detectRecursion(String fileName) {
-        if (activeScripts.contains(fileName)) {
-            consoleView.println("Recursion detected: " + fileName + " is already executing.");
-            return true;
-        }
-        activeScripts.add(fileName);
-        return false;
     }
 
     private ParsedCommand parse(String line) {
@@ -98,23 +79,27 @@ public class AppController {
     }
 
     private void handleResponse(CommandResponse response) {
-        if (response.message().equals("exit")) {
-            consoleView.println("Exiting without saving...");
-            System.exit(0);
-        }
         if (!response.successFlag()) {
             consoleView.println("Failure: " + response.message());
         }
-        if (response.successFlag() && !response.message().equals("Success.")) {
+        if (response.successFlag() && !"Success.".equals(response.message())) {
             consoleView.println(response.message());
         }
     }
 
-    public void setInputSource(InputSource inputSource) {
-        this.inputSource = inputSource;
+    public void stop() {
+        isRunning = false;
     }
 
-    public InputSource getInputSource() {
-        return inputSource;
+    public boolean isScriptActive(String fileName) {
+        return activeScripts.contains(fileName);
+    }
+
+    public void addActiveScript(String fileName) {
+        activeScripts.add(fileName);
+    }
+
+    public void removeActiveScript(String fileName) {
+        activeScripts.remove(fileName);
     }
 }

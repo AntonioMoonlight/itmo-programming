@@ -7,6 +7,9 @@ import client.FileInputSource;
 import client.InputSource;
 
 import java.io.FileNotFoundException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Optional;
 
 public class ExecuteScript extends Command{
     private final AppController appController;
@@ -17,17 +20,31 @@ public class ExecuteScript extends Command{
 
     @Override
     public CommandResponse execute(String[] args) throws ElementBuilder.NoMoreInputException {
-        InputSource prevSource = appController.getInputSource();
         String fileName = args[0];
-        try {
-            FileInputSource fileInputSource = new FileInputSource(fileName);
-            appController.setInputSource(fileInputSource);
-            appController.run();
-            appController.setInputSource(prevSource);
-            return CommandResponse.success();
-        } catch (FileNotFoundException e) {
-            return CommandResponse.failure("File not found.");
+
+        if (appController.isScriptActive(fileName)) {
+            return new CommandResponse(false,
+                    "Detected recursion: script '" + fileName + "' is already executing.");
         }
+
+        try {
+            appController.addActiveScript(fileName);
+            Path path = Paths.get(fileName).toAbsolutePath();
+            InputSource scriptSource = new FileInputSource(path.toString());
+
+            while (true) {
+                Optional<String> optLine = scriptSource.nextLine();
+                if (optLine.isEmpty()) break;
+                appController.processLine(optLine.get());
+            }
+
+        } catch (FileNotFoundException e) {
+            return new CommandResponse(false, "Файл скрипта не найден: " + fileName);
+        } finally {
+            appController.removeActiveScript(fileName);
+        }
+
+        return CommandResponse.success();
     }
 
     @Override
