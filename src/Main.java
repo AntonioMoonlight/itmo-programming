@@ -1,6 +1,11 @@
-import Controller.*;
-import Controller.Command.*;
-import View.*;
+import client.AppController;
+import client.ConsoleView;
+import client.ElementBuilder;
+import client.StdInSource;
+import server.CollectionManager;
+import server.CommandManager;
+import server.FileManager;
+import server.command.*;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -9,20 +14,24 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
 
+        /*int port = 8080;
+        Server server = new Server(port);
+        server.start();*/
+
         String envName = "DATA_FILE";
         Path dataFilePath = Paths.get(System.getenv(envName));
 
 
-        ConsoleView consoleView = new ConsoleView(System.out, System.err);
+        ConsoleView consoleView = new ConsoleView(System.out);
         CollectionManager collectionManager = new CollectionManager();
         FileManager fileManager = new FileManager(dataFilePath, collectionManager, consoleView);
-        ElementBuilder elementBuilder = new ElementBuilder(consoleView, StdInSource.INSTANCE, collectionManager.getIdGenerator());
+        ElementBuilder elementBuilder = new ElementBuilder(consoleView, collectionManager.getIdGenerator(), StdInSource.INSTANCE);
         CommandManager commandManager = new CommandManager();
-        AppController appController = new AppController(StdInSource.INSTANCE, elementBuilder,
+        AppController appController = new AppController(elementBuilder,
                 consoleView, commandManager);
 
         commandManager.register(new Help(consoleView, commandManager));
-        commandManager.register(new Exit());
+        commandManager.register(new Exit(appController));
         commandManager.register(new History(commandManager, consoleView));
         commandManager.register(new Show(consoleView, collectionManager));
         commandManager.register(new Add(collectionManager, elementBuilder));
@@ -35,12 +44,11 @@ public class Main {
         commandManager.register(new CountByLabel(collectionManager, consoleView));
         commandManager.register(new FilterLessThanGenre(collectionManager, consoleView));
         commandManager.register(new Info(consoleView, collectionManager));
-        commandManager.register(new Save(fileManager, consoleView));
-        commandManager.register(new ExecuteScript(consoleView, commandManager, elementBuilder, appController));
-        commandManager.register(new ExecuteScript(consoleView, commandManager, elementBuilder, appController));
+        commandManager.register(new Save(fileManager));
+        commandManager.register(new ExecuteScript(appController));
 
         List<String> messages = collectionManager.init(fileManager.readCollection());
         messages.forEach(consoleView::println);
-        appController.run();
+        appController.run(StdInSource.INSTANCE);
     }
 }
