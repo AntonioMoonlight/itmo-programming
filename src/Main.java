@@ -1,54 +1,43 @@
-import client.AppController;
-import client.ConsoleView;
-import client.ElementBuilder;
-import client.StdInSource;
-import server.CollectionManager;
-import server.CommandManager;
-import server.FileManager;
-import server.command.*;
-
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.List;
+import client.ClientMain;
+import server.ServerMain;
 
 public class Main {
     public static void main(String[] args) {
+        if (args.length == 0) {
+            printUsage();
+            return;
+        }
 
-        /*int port = 8080;
-        Server server = new Server(port);
-        server.start();*/
+        String mode = args[0].toLowerCase();
+        String[] modeArgs = new String[args.length - 1];
+        System.arraycopy(args, 1, modeArgs, 0, args.length - 1);
 
-        String envName = "DATA_FILE";
-        Path dataFilePath = Paths.get(System.getenv(envName));
+        switch (mode) {
+            case "server":
+                ServerMain.main(modeArgs);
+                break;
+            case "client":
+                ClientMain.main(modeArgs);
+                break;
+            default:
+                System.err.println("Unknown mode: " + mode);
+                printUsage();
+                System.exit(1);
+        }
+    }
 
-
-        ConsoleView consoleView = new ConsoleView(System.out);
-        CollectionManager collectionManager = new CollectionManager();
-        FileManager fileManager = new FileManager(dataFilePath, collectionManager, consoleView);
-        ElementBuilder elementBuilder = new ElementBuilder(consoleView, collectionManager.getIdGenerator(), StdInSource.INSTANCE);
-        CommandManager commandManager = new CommandManager();
-        AppController appController = new AppController(elementBuilder,
-                consoleView, commandManager);
-
-        commandManager.register(new Help(consoleView, commandManager));
-        commandManager.register(new Exit(appController));
-        commandManager.register(new History(commandManager, consoleView));
-        commandManager.register(new Show(consoleView, collectionManager));
-        commandManager.register(new Add(collectionManager, elementBuilder));
-        commandManager.register(new RemoveById(collectionManager));
-        commandManager.register(new UpdateById(collectionManager, elementBuilder));
-        commandManager.register(new Clear(collectionManager));
-        commandManager.register(new Head(collectionManager, consoleView));
-        commandManager.register(new RemoveLower(collectionManager, elementBuilder));
-        commandManager.register(new SumOfNumberOfParticipants(collectionManager, consoleView));
-        commandManager.register(new CountByLabel(collectionManager, consoleView));
-        commandManager.register(new FilterLessThanGenre(collectionManager, consoleView));
-        commandManager.register(new Info(consoleView, collectionManager));
-        commandManager.register(new Save(fileManager));
-        commandManager.register(new ExecuteScript(appController));
-
-        List<String> messages = collectionManager.init(fileManager.readCollection());
-        messages.forEach(consoleView::println);
-        appController.run(StdInSource.INSTANCE);
+    private static void printUsage() {
+        System.out.println("Music Band Collection - Client-Server Application");
+        System.out.println();
+        System.out.println("Usage:");
+        System.out.println("  java Main server [port]");
+        System.out.println("    Start server on specified port (default: 8080)");
+        System.out.println();
+        System.out.println("  java Main client [host] [port]");
+        System.out.println("    Start client connecting to specified host:port");
+        System.out.println("    (default: localhost:8080)");
+        System.out.println();
+        System.out.println("Environment Variables:");
+        System.out.println("  DATA_FILE - Path to the collection data file (required for server)");
     }
 }

@@ -3,16 +3,14 @@ package server.command;
 import server.CollectionManager;
 import server.CommandResponse;
 import client.ElementBuilder;
-import client.ConsoleView;
 
 public class Head extends Command {
 
     private final CollectionManager collectionManager;
-    private final ConsoleView consoleView;
-    public Head(CollectionManager collectionManager, ConsoleView consoleView) {
+    
+    public Head(CollectionManager collectionManager) {
         super("head", "Shows the first element of the collection", 0);
         this.collectionManager = collectionManager;
-        this.consoleView = consoleView;
     }
 
     @Override
@@ -23,7 +21,6 @@ public class Head extends Command {
             return CommandResponse.failure("The collection is empty.");
         }
 
-        consoleView.printMusicBandTable(firstElement);
-        return CommandResponse.success();
+        return new CommandResponse(true, "First element:\n" + firstElement.toString());
     }
 }

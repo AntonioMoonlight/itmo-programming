@@ -2,26 +2,18 @@ package server.command;
 
 import server.CollectionManager;
 import server.CommandResponse;
-import client.ElementBuilder;
-import common.MusicBand;
 
 public class Add extends Command {
 
-    private final CollectionManager collectionManager;
-    private final ElementBuilder elementBuilder;
-
-    public Add(CollectionManager collectionManager, ElementBuilder elementBuilder) {
+    public Add(CollectionManager collectionManager) {
         super("add", "Adds a new element to the collection from user input.", 0);
-        this.collectionManager = collectionManager;
-        this.elementBuilder = elementBuilder;
     }
 
-
     @Override
-    public CommandResponse execute(String[] args) throws ElementBuilder.NoMoreInputException, IllegalStateException {
-            MusicBand musicBand = elementBuilder.buildMusicBand();
-            String msg = collectionManager.add(musicBand);
-            return new CommandResponse(true,msg);
+    public CommandResponse execute(String[] args) {
+        // This method should not be called directly in client-server mode
+        // The RequestProcessor handles add with data
+        return CommandResponse.failure("This command requires object data and should be handled by RequestProcessor");
     }
 
     @Override

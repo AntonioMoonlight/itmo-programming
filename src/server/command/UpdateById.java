@@ -2,37 +2,22 @@ package server.command;
 
 import server.CollectionManager;
 import server.CommandResponse;
-import client.ElementBuilder;
-import common.MusicBand;
 
-public class UpdateById extends  Command {
-    private final CollectionManager collectionManager;
-    private final ElementBuilder elementBuilder;
+public class UpdateById extends Command {
 
-    public UpdateById(CollectionManager collectionManager, ElementBuilder elementBuilder) {
-        super("update_id", "Updates the element with given ID from user input", 1);
-        this.collectionManager = collectionManager;
-        this.elementBuilder = elementBuilder;
+    public UpdateById(CollectionManager collectionManager) {
+        super("update_by_id", "Updates the element with given ID from user input", 1);
     }
 
     @Override
-    public CommandResponse execute(String[] args) throws ElementBuilder.NoMoreInputException {
-        try {
-            int id = Integer.parseInt(args[0]);
-            if (collectionManager.getDeque().stream().noneMatch(b -> b.getId() == id)) {
-                return CommandResponse.failure("An element with given ID does not exist.");
-            } else {
-                MusicBand newBand = elementBuilder.buildMusicBand();
-                collectionManager.update(id, newBand);
-                return CommandResponse.success();
-            }
-        } catch (NumberFormatException e) {
-            return CommandResponse.failure(e.getMessage());
-        }
+    public CommandResponse execute(String[] args) {
+        // This method should not be called directly in client-server mode
+        // The RequestProcessor handles update_by_id with data
+        return CommandResponse.failure("This command requires object data and should be handled by RequestProcessor");
     }
 
     @Override
     public String getDisplayedName() {
-        return "update_id id";
+        return "update_by_id id";
     }
 }

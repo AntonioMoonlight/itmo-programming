@@ -1,14 +1,29 @@
 [
   {
     "id": 1,
-    "name": "t",
+    "name": "1",
     "coordinates": {
       "x": 1.0,
       "y": 1
     },
-    "creationDate": "2025-10-08 15:38",
+    "creationDate": "2025-10-08 17:56",
     "numberOfParticipants": 1,
     "genre": "POP",
+    "label": {
+      "name": "1",
+      "bands": 1
+    }
+  },
+  {
+    "id": 2,
+    "name": "1",
+    "coordinates": {
+      "x": 1.0,
+      "y": 1
+    },
+    "creationDate": "2025-10-08 17:57",
+    "numberOfParticipants": 1,
+    "genre": "SOUL",
     "label": {
       "name": "1",
       "bands": 1

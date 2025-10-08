@@ -2,18 +2,14 @@ package server.command;
 
 import server.CommandManager;
 import server.CommandResponse;
-import client.ConsoleView;
 
 import java.util.Map;
 
 public class Help extends Command {
     private final CommandManager commandManager;
 
-    private final ConsoleView consoleView;
-
-    public Help(ConsoleView consoleView, CommandManager commandManager) {
+    public Help(CommandManager commandManager) {
         super("help", "Shows information about the commands.", 0);
-        this.consoleView = consoleView;
         this.commandManager = commandManager;
     }
 
@@ -42,20 +38,21 @@ public class Help extends Command {
         String header = String.format(
                 "| %-" + maxNameLength + "s | %-" + maxDescLength + "s | %-" + argColumnWidth + "s |",
                 "Command", "Description", "Args");
-        consoleView.println(border);
-        consoleView.println(header);
-        consoleView.println(border);
+        
+        StringBuilder output = new StringBuilder();
+        output.append(border).append("\n");
+        output.append(header).append("\n");
+        output.append(border).append("\n");
 
         for (Command cmd : registry.values()) {
-            consoleView.println(String.format(
-                    "| %-" + maxNameLength + "s | %-" + maxDescLength + "s | %-" + argColumnWidth + "d |",
+            output.append(String.format(
+                    "| %-" + maxNameLength + "s | %-" + maxDescLength + "s | %-" + argColumnWidth + "d |\n",
                     cmd.getDisplayedName(),
                     cmd.getDescription(),
                     cmd.getVariableNumber()));
         }
-        consoleView.println(border);
+        output.append(border);
 
-        return CommandResponse.success();
+        return new CommandResponse(true, output.toString());
     }
-
 }

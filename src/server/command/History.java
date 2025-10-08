@@ -2,7 +2,6 @@ package server.command;
 
 import server.CommandManager;
 import server.CommandResponse;
-import client.ConsoleView;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -11,12 +10,10 @@ import java.util.List;
 public class History extends Command {
 
     private final CommandManager commandManager;
-    private final ConsoleView consoleView;
 
-    public History(CommandManager commandManager, ConsoleView consoleView) {
+    public History(CommandManager commandManager) {
         super("history", "Shows 8 last executed commands.", 0);
         this.commandManager = commandManager;
-        this.consoleView = consoleView;
     }
 
     @Override
@@ -29,7 +26,10 @@ public class History extends Command {
             count++;
         }
 
-        consoleView.println(firstEight.toString());
-        return CommandResponse.success();
+        if (firstEight.isEmpty()) {
+            return new CommandResponse(true, "No commands in history.");
+        }
+        
+        return new CommandResponse(true, "Command history:\n" + String.join("\n", firstEight));
     }
 }
