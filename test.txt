@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "name": "1",
+    "coordinates": {
+      "x": 1.0,
+      "y": 1
+    },
+    "creationDate": "2025-10-08 17:56",
+    "numberOfParticipants": 1,
+    "genre": "POP",
+    "label": {
+      "name": "1",
+      "bands": 1
+    }
+  },
+  {
+    "id": 3,
+    "name": "1",
+    "coordinates": {
+      "x": 1.0,
+      "y": 1
+    },
+    "creationDate": "2025-10-08 18:26",
+    "numberOfParticipants": 1,
+    "genre": "MATH_ROCK",
+    "label": {
+      "name": "1",
+      "bands": 1
+    }
+  }
+]

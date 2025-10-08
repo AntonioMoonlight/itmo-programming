@@ -1,9 +1,8 @@
 package common;
 
-import java.io.Serializable;
 import java.util.Arrays;
 
-public enum MusicGenre implements Comparable<MusicGenre>, Serializable {
+public enum MusicGenre {
 
     POP,
     SOUL,

@@ -1,6 +1,6 @@
 package server.command;
 
-import server.CommandResponse;
+import common.Response;
 import client.ElementBuilder;
 import server.FileManager;
 import java.io.FileNotFoundException;
@@ -13,12 +13,12 @@ public class Save extends Command {
     }
 
     @Override
-    public CommandResponse execute(String[] args) throws ElementBuilder.NoMoreInputException {
+    public Response execute(String[] args) throws ElementBuilder.NoMoreInputException {
         try {
             fileManager.writeCollection();
-            return CommandResponse.success();
+            return new Response(true, "Collection saved successfully.");
         } catch (FileNotFoundException e) {
-            return CommandResponse.failure("File not found or not permitted to read.");
+            return new Response(false, "File not found or not permitted to read.");
         }
     }
 }

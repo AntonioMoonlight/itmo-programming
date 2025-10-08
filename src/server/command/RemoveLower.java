@@ -1,28 +1,30 @@
 package server.command;
 
 import server.CollectionManager;
-import server.CommandResponse;
-import client.ElementBuilder;
+import common.Response;
 import common.MusicBand;
 
 public class RemoveLower extends Command {
     private final CollectionManager collectionManager;
-    private final ElementBuilder elementBuilder;
 
-    public RemoveLower(CollectionManager collectionManager, ElementBuilder elementBuilder) {
+    public RemoveLower(CollectionManager collectionManager) {
         super("remove_lower", "Removes all element less than the given one.", 0);
         this.collectionManager = collectionManager;
-        this.elementBuilder = elementBuilder;
     }
 
     @Override
-    public CommandResponse execute(String[] args) throws ElementBuilder.NoMoreInputException {
-        MusicBand musicBand = elementBuilder.buildMusicBand();
-        collectionManager.getDeque().stream()
-                .filter(band -> band.compareTo(musicBand) < 0)
-                .toList()
-                .forEach(collectionManager::remove);
-        return CommandResponse.success();
+    public Response execute(String[] args) {
+        return new Response(false, "RemoveLower command requires MusicBand data");
+    }
+    
+    @Override
+    public Response execute(String[] args, MusicBand musicBand) {
+        if (musicBand == null) {
+            return new Response(false, "RemoveLower command requires MusicBand data");
+        }
+        
+        long removedCount = collectionManager.removeLower(musicBand);
+        return new Response(true, "Removed " + removedCount + " elements lower than the specified one.");
     }
 
     @Override

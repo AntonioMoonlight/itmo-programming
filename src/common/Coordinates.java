@@ -3,12 +3,16 @@ package common;
 import java.io.Serializable;
 
 public class Coordinates implements Serializable {
+    private final Double x; //Поле не может быть null
+    private final int y;
+    
     public Double getX() {
         return x;
     }
-
-    private final Double x; //Поле не может быть null
-    private final int y;
+    
+    public int getY() {
+        return y;
+    }
     public Coordinates(Double x, int y) {
         this.x = x;
         this.y = y;

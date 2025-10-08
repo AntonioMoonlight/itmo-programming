@@ -1,6 +1,7 @@
 package server;
 
 import common.MusicBand;
+import common.MusicGenre;
 
 import java.time.LocalDateTime;
 import java.util.*;
@@ -40,6 +41,11 @@ public class CollectionManager {
         return messages;
     }
     public String add(MusicBand band) {
+        // If band has ID 0 (from client), assign a new ID
+        if (band.getId() == 0) {
+            band.setId(idGen.next());
+        }
+        
         String msg = "Id " + band.getId() + ": " + band.validate();
         if (!hasUniqueId(band)) {
             msg += "\nElement does not have unique ID!";
@@ -59,9 +65,9 @@ public class CollectionManager {
     }
 
     public boolean removeById(int id) {
-        boolean newDeque = deque.removeIf(band -> band.getId() == id);
+        boolean removed = deque.removeIf(band -> band.getId() == id);
         sort();
-        return newDeque;
+        return removed;
     }
 
     public void remove(MusicBand band) {
@@ -72,13 +78,61 @@ public class CollectionManager {
     public void update(int id, MusicBand newBand) {
         MusicBand copy = new MusicBand(newBand);
         idGen.assignId(id, copy);
-        for (MusicBand band : deque) {
-            if (band.getId() == id) {
-                deque.remove(band);
-                add(copy);
-            }
+        
+        // Use Stream API to find and replace the band
+        boolean found = deque.stream()
+                .filter(band -> band.getId() == id)
+                .findFirst()
+                .map(band -> {
+                    deque.remove(band);
+                    add(copy);
+                    return true;
+                })
+                .orElse(false);
+        
+        if (found) {
+            sort();
         }
+    }
+
+    // Stream API methods for collection operations
+    public long countByLabel(String labelName) {
+        return deque.stream()
+                .filter(band -> band.getLabel().getName().equals(labelName))
+                .count();
+    }
+
+    public int sumOfNumberOfParticipants() {
+        return deque.stream()
+                .mapToInt(MusicBand::getNumberOfParticipants)
+                .sum();
+    }
+
+    public List<MusicBand> filterLessThanGenre(MusicGenre genre) {
+        return deque.stream()
+                .filter(band -> band.getGenre().ordinal() < genre.ordinal())
+                .sorted()
+                .collect(Collectors.toList());
+    }
+
+    public Optional<MusicBand> getFirst() {
+        return deque.stream().findFirst();
+    }
+
+    public Optional<MusicBand> findById(int id) {
+        return deque.stream()
+                .filter(band -> band.getId() == id)
+                .findFirst();
+    }
+
+    public long removeLower(MusicBand reference) {
+        long removedCount = deque.stream()
+                .filter(band -> band.compareTo(reference) < 0)
+                .count();
+        
+        deque.removeIf(band -> band.compareTo(reference) < 0);
         sort();
+        return removedCount;
     }
 
     public ArrayDeque<MusicBand> getDeque() {

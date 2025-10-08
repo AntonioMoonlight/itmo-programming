@@ -1,38 +1,46 @@
 package server.command;
 
 import server.CollectionManager;
-import server.CommandResponse;
-import client.ElementBuilder;
+import common.Response;
 import common.MusicBand;
 
-public class UpdateById extends  Command {
+public class UpdateById extends Command {
     private final CollectionManager collectionManager;
-    private final ElementBuilder elementBuilder;
 
-    public UpdateById(CollectionManager collectionManager, ElementBuilder elementBuilder) {
-        super("update_id", "Updates the element with given ID from user input", 1);
+    public UpdateById(CollectionManager collectionManager) {
+        super("update_by_id", "Updates the element with given ID from user input", 1);
         this.collectionManager = collectionManager;
-        this.elementBuilder = elementBuilder;
     }
 
     @Override
-    public CommandResponse execute(String[] args) throws ElementBuilder.NoMoreInputException {
+    public Response execute(String[] args) {
+        return new Response(false, "UpdateById command requires MusicBand data");
+    }
+    
+    @Override
+    public Response execute(String[] args, MusicBand musicBand) {
+        if (musicBand == null) {
+            return new Response(false, "UpdateById command requires MusicBand data");
+        }
+        
         try {
             int id = Integer.parseInt(args[0]);
+            
+            // Check if element with given ID exists
             if (collectionManager.getDeque().stream().noneMatch(b -> b.getId() == id)) {
-                return CommandResponse.failure("An element with given ID does not exist.");
-            } else {
-                MusicBand newBand = elementBuilder.buildMusicBand();
-                collectionManager.update(id, newBand);
-                return CommandResponse.success();
+                return new Response(false, "An element with given ID does not exist.");
             }
+            
+            collectionManager.update(id, musicBand);
+            return new Response(true, "Element with ID " + id + " updated successfully.");
+            
         } catch (NumberFormatException e) {
-            return CommandResponse.failure(e.getMessage());
+            return new Response(false, "Invalid ID format");
         }
     }
 
     @Override
     public String getDisplayedName() {
-        return "update_id id";
+        return "update_by_id id";
     }
 }

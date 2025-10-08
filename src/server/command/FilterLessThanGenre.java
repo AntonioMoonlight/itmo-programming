@@ -1,34 +1,34 @@
 package server.command;
 
 import server.CollectionManager;
-import server.CommandResponse;
+import common.Response;
 import common.MusicGenre;
-import client.ConsoleView;
+import common.MusicBand;
 
-import java.util.ArrayDeque;
-import java.util.stream.Collectors;
+import java.util.List;
 
 public class FilterLessThanGenre extends Command {
     private final CollectionManager collectionManager;
-    private final ConsoleView consoleView;
 
-    public FilterLessThanGenre(CollectionManager collectionManager, ConsoleView consoleView) {
+    public FilterLessThanGenre(CollectionManager collectionManager) {
         super("filter_less_than_genre", "Shows all elements with field genre less than the given one,",
                 1);
         this.collectionManager = collectionManager;
-        this.consoleView = consoleView;
     }
 
     @Override
-    public CommandResponse execute(String[] args) {
+    public Response execute(String[] args) {
         try {
             MusicGenre genre = MusicGenre.valueOf(args[0].toUpperCase());
-            consoleView.printMusicBandsTable(collectionManager.getDeque().stream()
-                    .filter(g -> g.getGenre().compareTo(genre) < 0)
-                    .collect(Collectors.toCollection(ArrayDeque::new)));
-            return CommandResponse.success();
+            List<MusicBand> filtered = collectionManager.filterLessThanGenre(genre);
+            
+            if (filtered.isEmpty()) {
+                return new Response(true, "No elements found with genre less than " + genre);
+            }
+            
+            return new Response(true, "Elements with genre less than " + genre + ":");
         } catch (IllegalArgumentException e) {
-            return CommandResponse.failure("Invalid genre. Allowed genres: " + MusicGenre.allowed);
+            return new Response(false, "Invalid genre. Allowed genres: " + MusicGenre.allowed);
         }
     }
 

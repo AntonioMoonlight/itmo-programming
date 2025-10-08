@@ -2,20 +2,44 @@ package common;
 
 import java.io.Serializable;
 
+/**
+ * Represents a command request that can be sent from client to server
+ */
 public class Request implements Serializable {
     private final String commandName;
-    private final Serializable args;
+    private final String[] arguments;
+    private final Object data; // For commands that need to send objects (like MusicBand)
 
-    public Request(String commandName, Serializable args) {
+    public Request(String commandName, String[] arguments) {
         this.commandName = commandName;
-        this.args = args;
+        this.arguments = arguments;
+        this.data = null;
+    }
+
+    public Request(String commandName, String[] arguments, Object data) {
+        this.commandName = commandName;
+        this.arguments = arguments;
+        this.data = data;
     }
 
     public String getCommandName() {
         return commandName;
     }
 
-    public Serializable getArgs() {
-        return args;
+    public String[] getArguments() {
+        return arguments;
+    }
+
+    public Object getData() {
+        return data;
+    }
+
+    @Override
+    public String toString() {
+        return "Request{" +
+                "commandName='" + commandName + '\'' +
+                ", arguments=" + java.util.Arrays.toString(arguments) +
+                ", data=" + data +
+                '}';
     }
 }

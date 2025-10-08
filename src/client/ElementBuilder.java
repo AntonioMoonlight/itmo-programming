@@ -1,6 +1,5 @@
 package client;
 
-import server.IdGenerator;
 import common.Coordinates;
 import common.Label;
 import common.MusicBand;
@@ -18,7 +17,6 @@ import java.util.function.Predicate;
 
 public class ElementBuilder {
     private final ConsoleView consoleView;
-    private final IdGenerator idGenerator;
 
     public void setInputSource(InputSource inputSource) {
         this.inputSource = inputSource;
@@ -26,9 +24,8 @@ public class ElementBuilder {
 
     private InputSource inputSource;
 
-    public ElementBuilder(ConsoleView consoleView, IdGenerator idGenerator, InputSource inputSource) {
+    public ElementBuilder(ConsoleView consoleView, InputSource inputSource) {
         this.consoleView = consoleView;
-        this.idGenerator = idGenerator;
         this.inputSource = inputSource;
     }
 
@@ -74,8 +71,8 @@ public class ElementBuilder {
         MusicGenre genre = buildGenre();
 
         Label label = buildLabel();
-        // TODO: Send request for creating the object on server side.
-        return new MusicBand(idGenerator.next(),
+        // ID will be generated on server side, use temporary ID 0
+        return new MusicBand(0,
                 name,
                 coordinates,
                 creationDate,

@@ -1,18 +1,14 @@
 package server.command;
 
-import client.AppController;
-import server.CommandResponse;
+import common.Response;
 
 public class Exit extends Command {
-    private final AppController appController;
-    public Exit(AppController appController) {
-        super("exit", "Terminates the program without saving.", 0);
-        this.appController = appController;
+    public Exit() {
+        super("exit", "Terminates the client session.", 0);
     }
 
     @Override
-    public CommandResponse execute(String[] args) {
-        appController.stop();
-        return new CommandResponse(true, "Exiting without saving...");
+    public Response execute(String[] args) {
+        return new Response(true, "Exiting...");
     }
 }

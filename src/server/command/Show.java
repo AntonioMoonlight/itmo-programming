@@ -1,23 +1,21 @@
 package server.command;
 
 import server.CollectionManager;
-import server.CommandResponse;
-import client.ConsoleView;
+import common.Response;
 
 public class Show extends Command {
-    private final ConsoleView consoleView;
     private final CollectionManager collectionManager;
 
-    public Show(ConsoleView consoleView, CollectionManager collectionManager) {
+    public Show(CollectionManager collectionManager) {
         super("show", "Shows all elements of the collection.", 0);
-        this.consoleView = consoleView;
         this.collectionManager = collectionManager;
     }
 
     @Override
-    public CommandResponse execute(String[] args) {
-        consoleView.printMusicBandsTable(collectionManager.getDeque());
-
-        return CommandResponse.success();
+    public Response execute(String[] args) {
+        if (collectionManager.getDeque().isEmpty()) {
+            return new Response(true, "Collection is empty.");
+        }
+        return new Response(true, "Collection contents:");
     }
 }
