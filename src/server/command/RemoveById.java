@@ -1,7 +1,7 @@
 package server.command;
 
 import server.CollectionManager;
-import server.CommandResponse;
+import common.Response;
 
 public class RemoveById extends Command {
     private final CollectionManager collectionManager;
@@ -12,17 +12,17 @@ public class RemoveById extends Command {
 
 
     @Override
-    public CommandResponse execute(String[] args) {
+    public Response execute(String[] args) {
         try {
             int id = Integer.parseInt(args[0]);
              if (collectionManager.removeById(id)) {
-                 return CommandResponse.success();
+                 return new Response(true, "Element with ID " + id + " removed successfully.");
              } else {
-                 return CommandResponse.failure("An element with given ID does not exist.");
+                 return new Response(false, "An element with given ID does not exist.");
              }
         }
         catch (NumberFormatException e) {
-            return CommandResponse.failure(e.getMessage());
+            return new Response(false, e.getMessage());
         }
     }
 

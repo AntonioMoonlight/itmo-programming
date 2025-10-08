@@ -1,7 +1,7 @@
 package server.command;
 
 import server.CollectionManager;
-import server.CommandResponse;
+import common.Response;
 
 public class CountByLabel extends Command {
     private final CollectionManager collectionManager;
@@ -12,10 +12,10 @@ public class CountByLabel extends Command {
     }
 
     @Override
-    public CommandResponse execute(String[] args) {
+    public Response execute(String[] args) {
         String labelName = args[0];
         long count = collectionManager.countByLabel(labelName);
-        return new CommandResponse(true, "Elements with label '" + labelName + "': " + count);
+        return new Response(true, "Elements with label '" + labelName + "': " + count);
     }
 
     @Override

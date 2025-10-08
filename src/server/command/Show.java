@@ -1,7 +1,7 @@
 package server.command;
 
 import server.CollectionManager;
-import server.CommandResponse;
+import common.Response;
 
 public class Show extends Command {
     private final CollectionManager collectionManager;
@@ -12,10 +12,10 @@ public class Show extends Command {
     }
 
     @Override
-    public CommandResponse execute(String[] args) {
+    public Response execute(String[] args) {
         if (collectionManager.getDeque().isEmpty()) {
-            return new CommandResponse(true, "Collection is empty.");
+            return new Response(true, "Collection is empty.");
         }
-        return new CommandResponse(true, "Collection contents:");
+        return new Response(true, "Collection contents:");
     }
 }

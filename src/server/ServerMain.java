@@ -3,6 +3,7 @@ package server;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import server.network.Server;
+import server.network.RequestProcessor;
 import server.command.*;
 import client.ElementBuilder;
 import client.StdInSource;
@@ -61,6 +62,9 @@ public class ServerMain {
 
             // Start server
             Server server = new Server(port, commandManager, collectionManager);
+            
+            // Register ExecuteScript command after server is created (so we have access to RequestProcessor)
+            commandManager.register(new ExecuteScript(server.getRequestProcessor()));
             
             // Add shutdown hook to save collection
             Runtime.getRuntime().addShutdownHook(new Thread(() -> {

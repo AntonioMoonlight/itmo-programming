@@ -1,7 +1,7 @@
 package server.command;
 
 import server.CollectionManager;
-import server.CommandResponse;
+import common.Response;
 import client.ElementBuilder;
 import common.MusicBand;
 
@@ -16,11 +16,11 @@ public class SumOfNumberOfParticipants extends Command {
     }
 
     @Override
-    public CommandResponse execute(String[] args) throws ElementBuilder.NoMoreInputException {
+    public Response execute(String[] args) throws ElementBuilder.NoMoreInputException {
         int sum = collectionManager.getDeque().stream()
                 .mapToInt(MusicBand::getNumberOfParticipants)
                 .sum();
         
-        return new CommandResponse(true, "Sum of number of participants: " + sum);
+        return new Response(true, "Sum of number of participants: " + sum);
     }
 }

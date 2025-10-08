@@ -4,14 +4,12 @@ client\ConsoleView.class
 server\network\Server.class
 server\command\Command.class
 server\IdGenerator.class
-server\command\ExecuteScript.class
 server\command\History.class
 client\StdInSource.class
 server\CollectionManager.class
 common\MusicBandValidator$ValidationResult.class
 server\jsonadapters\LocalDateTimeAdapter.class
 common\Response.class
-client\AppController.class
 server\command\FilterLessThanGenre.class
 server\network\Server$ClientHandler.class
 common\MusicBand.class
@@ -38,7 +36,6 @@ common\Request.class
 client\NetworkAppController$ParsedCommand.class
 server\ServerMain.class
 client\ClientMain.class
-client\AppController$ParsedCommand.class
 server\command\Save.class
 server\jsonadapters\DateAdapter.class
 server\command\Clear.class

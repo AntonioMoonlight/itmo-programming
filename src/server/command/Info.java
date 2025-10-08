@@ -1,7 +1,7 @@
 package server.command;
 
 import server.CollectionManager;
-import server.CommandResponse;
+import common.Response;
 
 import java.time.format.DateTimeFormatter;
 
@@ -15,7 +15,7 @@ public class Info extends Command {
     }
 
     @Override
-    public CommandResponse execute(String[] args) {
+    public Response execute(String[] args) {
         String formattedDate = collectionManager.getInitDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
 
         String info = "Information about the collection:" + "\n" +
@@ -23,6 +23,6 @@ public class Info extends Command {
                 "Initialization date: " + formattedDate + "\n" +
                 "Number of elements: " + collectionManager.getDeque().size();
         
-        return new CommandResponse(true, info);
+        return new Response(true, info);
     }
 }

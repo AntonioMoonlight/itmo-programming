@@ -1,19 +1,30 @@
 package server.command;
 
 import server.CollectionManager;
-import server.CommandResponse;
+import common.Response;
+import common.MusicBand;
 
 public class RemoveLower extends Command {
+    private final CollectionManager collectionManager;
 
     public RemoveLower(CollectionManager collectionManager) {
         super("remove_lower", "Removes all element less than the given one.", 0);
+        this.collectionManager = collectionManager;
     }
 
     @Override
-    public CommandResponse execute(String[] args) {
-        // This method should not be called directly in client-server mode
-        // The RequestProcessor handles remove_lower with data
-        return CommandResponse.failure("This command requires object data and should be handled by RequestProcessor");
+    public Response execute(String[] args) {
+        return new Response(false, "RemoveLower command requires MusicBand data");
+    }
+    
+    @Override
+    public Response execute(String[] args, MusicBand musicBand) {
+        if (musicBand == null) {
+            return new Response(false, "RemoveLower command requires MusicBand data");
+        }
+        
+        long removedCount = collectionManager.removeLower(musicBand);
+        return new Response(true, "Removed " + removedCount + " elements lower than the specified one.");
     }
 
     @Override

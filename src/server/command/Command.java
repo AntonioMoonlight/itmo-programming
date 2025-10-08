@@ -1,6 +1,7 @@
 package server.command;
-import server.CommandResponse;
+import common.Response;
 import client.ElementBuilder;
+import common.MusicBand;
 
 public abstract class Command {
     private final String name;
@@ -13,20 +14,33 @@ public abstract class Command {
         this.variableNumber = variableNumber;
     }
 
-    public abstract CommandResponse execute(String[] args) throws ElementBuilder.NoMoreInputException;
-    public CommandResponse validateAndExecute(String[] args) throws ElementBuilder.NoMoreInputException {
-        CommandResponse validationResponse = validateArgCount(args, variableNumber);
-        if (!validationResponse.successFlag()) return validationResponse;
+    public abstract Response execute(String[] args) throws ElementBuilder.NoMoreInputException;
+    
+    // New method for commands that need MusicBand data
+    public Response execute(String[] args, MusicBand musicBand) throws ElementBuilder.NoMoreInputException {
+        // Default implementation delegates to the basic execute method
         return execute(args);
     }
-    public CommandResponse validateArgCount(String[] args, int variableNumber) {
+    
+    public Response validateAndExecute(String[] args) throws ElementBuilder.NoMoreInputException {
+        Response validationResponse = validateArgCount(args, variableNumber);
+        if (!validationResponse.isSuccess()) return validationResponse;
+        return execute(args);
+    }
+    
+    public Response validateAndExecute(String[] args, MusicBand musicBand) throws ElementBuilder.NoMoreInputException {
+        Response validationResponse = validateArgCount(args, variableNumber);
+        if (!validationResponse.isSuccess()) return validationResponse;
+        return execute(args, musicBand);
+    }
+    public Response validateArgCount(String[] args, int variableNumber) {
         if (args.length != variableNumber) {
-            return CommandResponse.failure(
+            return new Response(false,
                     String.format("Command '%s' expects %d argument(s), but got %d.",
                             name, variableNumber, args.length)
             );
         }
-        return CommandResponse.success();
+        return new Response(true, "");
     }
 
     public String getName() { return name; }

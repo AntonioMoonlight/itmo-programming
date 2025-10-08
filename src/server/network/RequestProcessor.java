@@ -4,8 +4,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import server.CommandManager;
 import server.CollectionManager;
-import server.CommandResponse;
 import server.command.Command;
+import server.command.ExecuteScript;
 import common.Request;
 import common.Response;
 import common.MusicBand;
@@ -38,24 +38,27 @@ public class RequestProcessor {
                 return new Response(false, "Unknown command: " + request.getCommandName());
             }
 
-            // Handle commands that need MusicBand data
-            CommandResponse commandResponse;
+            // Execute command with proper delegation
+            Response response;
             if (needsMusicBandData(request.getCommandName()) && request.getData() instanceof MusicBand) {
-                commandResponse = executeCommandWithData(command, request);
+                // Execute command with MusicBand data for commands that need it
+                response = command.validateAndExecute(request.getArguments(), (MusicBand) request.getData());
+            } else if ("execute_script".equals(request.getCommandName()) && request.getData() instanceof String) {
+                // Handle ExecuteScript with script content as String data
+                ExecuteScript executeScript = (ExecuteScript) command;
+                response = executeScript.executeScript(request.getArguments(), (String) request.getData());
             } else {
-                commandResponse = command.validateAndExecute(request.getArguments());
+                // Execute command normally
+                response = command.validateAndExecute(request.getArguments());
             }
             
             // Add command to history
-            if (commandResponse.successFlag()) {
+            if (response.isSuccess()) {
                 commandManager.getHistory().addFirst(command.getName());
             }
 
-            // Convert CommandResponse to Response
-            Response response;
-            
             // For commands that return collection data, include sorted collection
-            if (isCollectionCommand(request.getCommandName()) && commandResponse.successFlag()) {
+            if (isCollectionCommand(request.getCommandName()) && response.isSuccess()) {
                 List<MusicBand> sortedCollection = collectionManager.getDeque().stream()
                     .sorted((b1, b2) -> {
                         // Sort by coordinates (x, then y)
@@ -65,9 +68,7 @@ public class RequestProcessor {
                     })
                     .collect(Collectors.toList());
                 
-                response = new Response(commandResponse.successFlag(), commandResponse.message(), sortedCollection);
-            } else {
-                response = new Response(commandResponse.successFlag(), commandResponse.message());
+                response = new Response(response.isSuccess(), response.getMessage(), sortedCollection);
             }
 
             logger.debug("Request processed successfully: {}", request.getCommandName());
@@ -86,39 +87,6 @@ public class RequestProcessor {
         return "add".equals(commandName) || 
                "update_by_id".equals(commandName) || 
                "remove_lower".equals(commandName);
-    }
-
-    private CommandResponse executeCommandWithData(Command command, Request request) throws ElementBuilder.NoMoreInputException {
-        MusicBand musicBand = (MusicBand) request.getData();
-        
-        // For different commands that need MusicBand data, handle appropriately
-        if ("add".equals(command.getName())) {
-            String msg = collectionManager.add(musicBand);
-            return new CommandResponse(true, msg);
-        } else if ("update_by_id".equals(command.getName())) {
-            if (request.getArguments().length != 1) {
-                return CommandResponse.failure("update_by_id requires exactly one argument (id)");
-            }
-            try {
-                int id = Integer.parseInt(request.getArguments()[0]);
-                
-                // Check if element with given ID exists
-                if (collectionManager.getDeque().stream().noneMatch(b -> b.getId() == id)) {
-                    return CommandResponse.failure("An element with given ID does not exist.");
-                }
-                
-                collectionManager.update(id, musicBand);
-                return new CommandResponse(true, "Element with ID " + id + " updated successfully.");
-            } catch (NumberFormatException e) {
-                return CommandResponse.failure("Invalid ID format");
-            }
-        } else if ("remove_lower".equals(command.getName())) {
-            long removedCount = collectionManager.removeLower(musicBand);
-            return new CommandResponse(true, "Removed " + removedCount + " elements lower than the specified one.");
-        }
-        
-        // Fallback to normal execution
-        return command.validateAndExecute(request.getArguments());
     }
 
     /**

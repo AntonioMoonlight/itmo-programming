@@ -1,7 +1,7 @@
 package server.command;
 
 import server.CollectionManager;
-import server.CommandResponse;
+import common.Response;
 import common.MusicGenre;
 import common.MusicBand;
 
@@ -17,18 +17,18 @@ public class FilterLessThanGenre extends Command {
     }
 
     @Override
-    public CommandResponse execute(String[] args) {
+    public Response execute(String[] args) {
         try {
             MusicGenre genre = MusicGenre.valueOf(args[0].toUpperCase());
             List<MusicBand> filtered = collectionManager.filterLessThanGenre(genre);
             
             if (filtered.isEmpty()) {
-                return new CommandResponse(true, "No elements found with genre less than " + genre);
+                return new Response(true, "No elements found with genre less than " + genre);
             }
             
-            return new CommandResponse(true, "Elements with genre less than " + genre + ":");
+            return new Response(true, "Elements with genre less than " + genre + ":");
         } catch (IllegalArgumentException e) {
-            return CommandResponse.failure("Invalid genre. Allowed genres: " + MusicGenre.allowed);
+            return new Response(false, "Invalid genre. Allowed genres: " + MusicGenre.allowed);
         }
     }
 

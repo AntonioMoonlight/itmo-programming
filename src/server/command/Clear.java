@@ -1,7 +1,7 @@
 package server.command;
 
 import server.CollectionManager;
-import server.CommandResponse;
+import common.Response;
 
 public class Clear extends Command {
     private final CollectionManager collectionManager;
@@ -12,8 +12,8 @@ public class Clear extends Command {
     }
 
     @Override
-    public CommandResponse execute(String[] args) {
+    public Response execute(String[] args) {
         collectionManager.clear();
-        return CommandResponse.success();
+        return new Response(true, "Collection cleared.");
     }
 }

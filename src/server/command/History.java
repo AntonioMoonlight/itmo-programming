@@ -1,7 +1,7 @@
 package server.command;
 
 import server.CommandManager;
-import server.CommandResponse;
+import common.Response;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -17,7 +17,7 @@ public class History extends Command {
     }
 
     @Override
-    public CommandResponse execute(String[] args) {
+    public Response execute(String[] args) {
         List<String> firstEight = new ArrayList<>(8);
         Iterator<String> it = commandManager.getHistory().iterator();
         int count = 0;
@@ -27,9 +27,9 @@ public class History extends Command {
         }
 
         if (firstEight.isEmpty()) {
-            return new CommandResponse(true, "No commands in history.");
+            return new Response(true, "No commands in history.");
         }
         
-        return new CommandResponse(true, "Command history:\n" + String.join("\n", firstEight));
+        return new Response(true, "Command history:\n" + String.join("\n", firstEight));
     }
 }

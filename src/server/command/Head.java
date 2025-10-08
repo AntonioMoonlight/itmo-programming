@@ -1,7 +1,7 @@
 package server.command;
 
 import server.CollectionManager;
-import server.CommandResponse;
+import common.Response;
 import client.ElementBuilder;
 
 public class Head extends Command {
@@ -14,13 +14,13 @@ public class Head extends Command {
     }
 
     @Override
-    public CommandResponse execute(String[] args) throws ElementBuilder.NoMoreInputException {
+    public Response execute(String[] args) throws ElementBuilder.NoMoreInputException {
         var firstElement = collectionManager.getDeque().peekFirst();
 
         if (firstElement == null) {
-            return CommandResponse.failure("The collection is empty.");
+            return new Response(false, "The collection is empty.");
         }
 
-        return new CommandResponse(true, "First element:\n" + firstElement.toString());
+        return new Response(true, "First element:\n" + firstElement.toString());
     }
 }

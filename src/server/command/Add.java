@@ -1,19 +1,30 @@
 package server.command;
 
 import server.CollectionManager;
-import server.CommandResponse;
+import common.Response;
+import common.MusicBand;
 
 public class Add extends Command {
+    private final CollectionManager collectionManager;
 
     public Add(CollectionManager collectionManager) {
         super("add", "Adds a new element to the collection from user input.", 0);
+        this.collectionManager = collectionManager;
     }
 
     @Override
-    public CommandResponse execute(String[] args) {
-        // This method should not be called directly in client-server mode
-        // The RequestProcessor handles add with data
-        return CommandResponse.failure("This command requires object data and should be handled by RequestProcessor");
+    public Response execute(String[] args) {
+        return new Response(false, "Add command requires MusicBand data");
+    }
+    
+    @Override
+    public Response execute(String[] args, MusicBand musicBand) {
+        if (musicBand == null) {
+            return new Response(false, "Add command requires MusicBand data");
+        }
+        
+        String msg = collectionManager.add(musicBand);
+        return new Response(true, msg);
     }
 
     @Override

@@ -108,3 +108,130 @@ java.lang.NegativeArraySizeException: -1393754107
 2025-10-08 17:58:03.015 [server.ServerMain.main()] INFO  server.network.Server - Received request: show from /127.0.0.1:52693
 2025-10-08 17:58:03.015 [server.ServerMain.main()] INFO  server.network.Server - Response sent to /127.0.0.1:52693
 2025-10-08 17:58:14.791 [Thread-2] INFO  server.ServerMain - Shutting down server...
+2025-10-08 18:26:23.792 [server.ServerMain.main()] INFO  server.ServerMain - Collection loaded with 2 items
+2025-10-08 18:26:23.796 [server.ServerMain.main()] INFO  server.ServerMain - Collection init: Id 1: Validation succeeded.
+2025-10-08 18:26:23.798 [server.ServerMain.main()] INFO  server.ServerMain - Collection init: Id 2: Validation succeeded.
+2025-10-08 18:26:23.802 [server.ServerMain.main()] INFO  server.ServerMain - Starting server on port 8080
+2025-10-08 18:26:23.803 [server.ServerMain.main()] INFO  server.network.Server - Starting server on port 8080
+2025-10-08 18:26:24.017 [server.ServerMain.main()] INFO  server.network.Server - Server started successfully on port 8080
+2025-10-08 18:26:32.449 [server.ServerMain.main()] INFO  server.network.Server - New client connected: /127.0.0.1:53881
+2025-10-08 18:26:45.098 [server.ServerMain.main()] INFO  server.network.Server - Received request: add from /127.0.0.1:53881
+2025-10-08 18:26:45.098 [server.ServerMain.main()] INFO  server.network.Server - Response sent to /127.0.0.1:53881
+2025-10-08 18:26:46.750 [server.ServerMain.main()] INFO  server.network.Server - Received request: show from /127.0.0.1:53881
+2025-10-08 18:26:46.750 [server.ServerMain.main()] INFO  server.network.Server - Response sent to /127.0.0.1:53881
+2025-10-08 18:26:56.480 [server.ServerMain.main()] INFO  server.network.Server - New client connected: /127.0.0.1:53888
+2025-10-08 18:26:58.040 [server.ServerMain.main()] INFO  server.network.Server - Received request: show from /127.0.0.1:53888
+2025-10-08 18:26:58.040 [server.ServerMain.main()] INFO  server.network.Server - Response sent to /127.0.0.1:53888
+2025-10-08 18:27:01.660 [server.ServerMain.main()] WARN  server.network.Server - Error reading from client java.nio.channels.SocketChannel[connected local=/127.0.0.1:8080 remote=/127.0.0.1:53888]: Client disconnected
+2025-10-08 18:27:01.661 [server.ServerMain.main()] INFO  server.network.Server - Closing connection to client: /127.0.0.1:53888
+2025-10-08 18:27:06.175 [server.ServerMain.main()] WARN  server.network.Server - Error reading from client java.nio.channels.SocketChannel[connected local=/127.0.0.1:8080 remote=/127.0.0.1:53881]: Client disconnected
+2025-10-08 18:27:06.175 [server.ServerMain.main()] INFO  server.network.Server - Closing connection to client: /127.0.0.1:53881
+2025-10-08 18:27:09.240 [Thread-2] INFO  server.ServerMain - Shutting down server...
+2025-10-08 18:48:13.311 [server.ServerMain.main()] INFO  server.ServerMain - Collection loaded with 3 items
+2025-10-08 18:48:13.315 [server.ServerMain.main()] INFO  server.ServerMain - Collection init: Id 1: Validation succeeded.
+2025-10-08 18:48:13.315 [server.ServerMain.main()] INFO  server.ServerMain - Collection init: Id 2: Validation succeeded.
+2025-10-08 18:48:13.315 [server.ServerMain.main()] INFO  server.ServerMain - Collection init: Id 3: Validation succeeded.
+2025-10-08 18:48:13.318 [server.ServerMain.main()] INFO  server.ServerMain - Starting server on port 8080
+2025-10-08 18:48:13.319 [server.ServerMain.main()] INFO  server.network.Server - Starting server on port 8080
+2025-10-08 18:48:13.572 [server.ServerMain.main()] INFO  server.network.Server - Server started successfully on port 8080
+2025-10-08 18:48:22.981 [server.ServerMain.main()] INFO  server.network.Server - New client connected: /127.0.0.1:55325
+2025-10-08 18:48:30.725 [server.ServerMain.main()] INFO  server.network.Server - Received request: help from /127.0.0.1:55325
+2025-10-08 18:48:30.741 [server.ServerMain.main()] INFO  server.network.Server - Response sent to /127.0.0.1:55325
+2025-10-08 18:48:35.376 [server.ServerMain.main()] INFO  server.network.Server - Received request: show from /127.0.0.1:55325
+2025-10-08 18:48:35.376 [server.ServerMain.main()] INFO  server.network.Server - Response sent to /127.0.0.1:55325
+2025-10-08 18:48:42.925 [server.ServerMain.main()] INFO  server.network.Server - Received request: remove_by_id from /127.0.0.1:55325
+2025-10-08 18:48:42.929 [server.ServerMain.main()] INFO  server.network.Server - Response sent to /127.0.0.1:55325
+2025-10-08 18:48:45.642 [server.ServerMain.main()] INFO  server.network.Server - Received request: show from /127.0.0.1:55325
+2025-10-08 18:48:45.642 [server.ServerMain.main()] INFO  server.network.Server - Response sent to /127.0.0.1:55325
+2025-10-08 18:49:00.141 [server.ServerMain.main()] WARN  server.network.Server - Error reading from client java.nio.channels.SocketChannel[connected local=/127.0.0.1:8080 remote=/127.0.0.1:55325]: Client disconnected
+2025-10-08 18:49:00.141 [server.ServerMain.main()] INFO  server.network.Server - Closing connection to client: /127.0.0.1:55325
+2025-10-08 18:49:35.518 [Thread-2] INFO  server.ServerMain - Shutting down server...
+2025-10-08 18:49:42.857 [server.ServerMain.main()] INFO  server.ServerMain - Collection loaded with 2 items
+2025-10-08 18:49:42.857 [server.ServerMain.main()] INFO  server.ServerMain - Collection init: Id 1: Validation succeeded.
+2025-10-08 18:49:42.857 [server.ServerMain.main()] INFO  server.ServerMain - Collection init: Id 3: Validation succeeded.
+2025-10-08 18:49:42.872 [server.ServerMain.main()] INFO  server.ServerMain - Starting server on port 8080
+2025-10-08 18:49:42.872 [server.ServerMain.main()] INFO  server.network.Server - Starting server on port 8080
+2025-10-08 18:49:43.033 [server.ServerMain.main()] INFO  server.network.Server - Server started successfully on port 8080
+2025-10-08 18:49:43.557 [Thread-2] INFO  server.ServerMain - Shutting down server...
+2025-10-08 18:49:43.560 [Thread-2] INFO  server.network.Server - Stopping server...
+2025-10-08 19:01:48.787 [server.ServerMain.main()] INFO  server.ServerMain - Collection loaded with 2 items
+2025-10-08 19:01:48.804 [server.ServerMain.main()] INFO  server.ServerMain - Collection init: Id 1: Validation succeeded.
+2025-10-08 19:01:48.804 [server.ServerMain.main()] INFO  server.ServerMain - Collection init: Id 3: Validation succeeded.
+2025-10-08 19:01:48.804 [server.ServerMain.main()] INFO  server.ServerMain - Starting server on port 8080
+2025-10-08 19:01:48.804 [server.ServerMain.main()] INFO  server.network.Server - Starting server on port 8080
+2025-10-08 19:01:48.956 [server.ServerMain.main()] INFO  server.network.Server - Server started successfully on port 8080
+2025-10-08 19:01:55.563 [server.ServerMain.main()] INFO  server.network.Server - New client connected: /127.0.0.1:55865
+2025-10-08 19:01:57.784 [server.ServerMain.main()] INFO  server.network.Server - Received request: help from /127.0.0.1:55865
+2025-10-08 19:01:57.810 [server.ServerMain.main()] INFO  server.network.Server - Response sent to /127.0.0.1:55865
+2025-10-08 19:02:09.053 [server.ServerMain.main()] INFO  server.network.Server - Received request: info from /127.0.0.1:55865
+2025-10-08 19:02:09.055 [server.ServerMain.main()] INFO  server.network.Server - Response sent to /127.0.0.1:55865
+2025-10-08 19:02:09.058 [server.ServerMain.main()] INFO  server.network.Server - Received request: show from /127.0.0.1:55865
+2025-10-08 19:02:09.064 [server.ServerMain.main()] INFO  server.network.Server - Response sent to /127.0.0.1:55865
+2025-10-08 19:02:41.026 [server.ServerMain.main()] INFO  server.network.Server - Received request: history from /127.0.0.1:55865
+2025-10-08 19:02:41.026 [server.ServerMain.main()] INFO  server.network.Server - Response sent to /127.0.0.1:55865
+2025-10-08 19:02:50.650 [server.ServerMain.main()] INFO  server.network.Server - New client connected: /127.0.0.1:55886
+2025-10-08 19:02:52.908 [server.ServerMain.main()] INFO  server.network.Server - Received request: history from /127.0.0.1:55886
+2025-10-08 19:02:52.908 [server.ServerMain.main()] INFO  server.network.Server - Response sent to /127.0.0.1:55886
+2025-10-08 19:04:28.513 [server.ServerMain.main()] WARN  server.network.Server - Error reading from client java.nio.channels.SocketChannel[connected local=/127.0.0.1:8080 remote=/127.0.0.1:55865]: Client disconnected
+2025-10-08 19:04:28.514 [server.ServerMain.main()] INFO  server.network.Server - Closing connection to client: /127.0.0.1:55865
+2025-10-08 19:04:32.035 [server.ServerMain.main()] WARN  server.network.Server - Error reading from client java.nio.channels.SocketChannel[connected local=/127.0.0.1:8080 remote=/127.0.0.1:55886]: Client disconnected
+2025-10-08 19:04:32.035 [server.ServerMain.main()] INFO  server.network.Server - Closing connection to client: /127.0.0.1:55886
+2025-10-08 19:04:34.177 [Thread-2] INFO  server.ServerMain - Shutting down server...
+2025-10-08 19:04:34.178 [Thread-2] INFO  server.network.Server - Stopping server...
+2025-10-08 19:08:35.076 [server.ServerMain.main()] INFO  server.ServerMain - Collection loaded with 0 items
+2025-10-08 19:08:35.090 [server.ServerMain.main()] INFO  server.ServerMain - Starting server on port 8080
+2025-10-08 19:08:35.090 [server.ServerMain.main()] INFO  server.network.Server - Starting server on port 8080
+2025-10-08 19:08:35.257 [server.ServerMain.main()] INFO  server.network.Server - Server started successfully on port 8080
+2025-10-08 19:09:01.788 [server.ServerMain.main()] INFO  server.ServerMain - Collection loaded with 2 items
+2025-10-08 19:09:01.788 [server.ServerMain.main()] INFO  server.ServerMain - Collection init: Id 1: Validation succeeded.
+2025-10-08 19:09:01.788 [server.ServerMain.main()] INFO  server.ServerMain - Collection init: Id 3: Validation succeeded.
+2025-10-08 19:09:01.788 [server.ServerMain.main()] INFO  server.ServerMain - Starting server on port 8080
+2025-10-08 19:09:01.788 [server.ServerMain.main()] INFO  server.network.Server - Starting server on port 8080
+2025-10-08 19:09:02.000 [server.ServerMain.main()] INFO  server.network.Server - Server started successfully on port 8080
+2025-10-08 19:11:42.892 [server.ServerMain.main()] INFO  server.network.Server - New client connected: /127.0.0.1:56142
+2025-10-08 19:12:01.319 [server.ServerMain.main()] INFO  server.network.Server - Received request: info from /127.0.0.1:56142
+2025-10-08 19:12:01.324 [server.ServerMain.main()] INFO  server.network.Server - Response sent to /127.0.0.1:56142
+2025-10-08 19:13:14.447 [server.ServerMain.main()] INFO  server.network.Server - Received request: help from /127.0.0.1:56142
+2025-10-08 19:13:14.463 [server.ServerMain.main()] INFO  server.network.Server - Response sent to /127.0.0.1:56142
+2025-10-08 19:40:18.369 [Thread-2] INFO  server.ServerMain - Shutting down server...
+2025-10-08 19:40:29.577 [server.ServerMain.main()] INFO  server.ServerMain - Collection loaded with 2 items
+2025-10-08 19:40:29.577 [server.ServerMain.main()] INFO  server.ServerMain - Collection init: Id 1: Validation succeeded.
+2025-10-08 19:40:29.577 [server.ServerMain.main()] INFO  server.ServerMain - Collection init: Id 3: Validation succeeded.
+2025-10-08 19:40:29.591 [server.ServerMain.main()] INFO  server.ServerMain - Starting server on port 8080
+2025-10-08 19:40:29.591 [server.ServerMain.main()] INFO  server.network.Server - Starting server on port 8080
+2025-10-08 19:40:29.765 [server.ServerMain.main()] INFO  server.network.Server - Server started successfully on port 8080
+2025-10-08 19:40:49.356 [Thread-2] INFO  server.ServerMain - Shutting down server...
+2025-10-08 19:40:49.356 [Thread-2] INFO  server.network.Server - Stopping server...
+2025-10-08 19:40:49.372 [Thread-2] INFO  server.network.Server - Server stopped
+2025-10-08 19:40:57.046 [server.ServerMain.main()] INFO  server.ServerMain - Collection loaded with 2 items
+2025-10-08 19:40:57.046 [server.ServerMain.main()] INFO  server.ServerMain - Collection init: Id 1: Validation succeeded.
+2025-10-08 19:40:57.046 [server.ServerMain.main()] INFO  server.ServerMain - Collection init: Id 3: Validation succeeded.
+2025-10-08 19:40:57.046 [server.ServerMain.main()] INFO  server.ServerMain - Starting server on port 8080
+2025-10-08 19:40:57.046 [server.ServerMain.main()] INFO  server.network.Server - Starting server on port 8080
+2025-10-08 19:40:57.190 [server.ServerMain.main()] INFO  server.network.Server - Server started successfully on port 8080
+2025-10-08 19:41:12.775 [server.ServerMain.main()] INFO  server.network.Server - New client connected: /127.0.0.1:65040
+2025-10-08 19:41:36.716 [server.ServerMain.main()] INFO  server.network.Server - Received request: help from /127.0.0.1:65040
+2025-10-08 19:41:36.738 [server.ServerMain.main()] INFO  server.network.Server - Response sent to /127.0.0.1:65040
+2025-10-08 19:41:46.944 [server.ServerMain.main()] INFO  server.network.Server - Received request: execute_script from /127.0.0.1:65040
+2025-10-08 19:41:46.946 [server.ServerMain.main()] INFO  server.network.Server - Response sent to /127.0.0.1:65040
+2025-10-08 19:42:04.328 [server.ServerMain.main()] INFO  server.network.Server - Received request: execute_script from /127.0.0.1:65040
+2025-10-08 19:42:04.328 [server.ServerMain.main()] INFO  server.network.Server - Response sent to /127.0.0.1:65040
+2025-10-08 19:42:16.907 [server.ServerMain.main()] INFO  server.network.Server - Received request: execute_script from /127.0.0.1:65040
+2025-10-08 19:42:16.907 [server.ServerMain.main()] INFO  server.network.Server - Response sent to /127.0.0.1:65040
+2025-10-08 19:42:31.880 [server.ServerMain.main()] INFO  server.network.Server - Received request: execute_script from /127.0.0.1:65040
+2025-10-08 19:42:31.896 [server.ServerMain.main()] INFO  server.network.Server - Response sent to /127.0.0.1:65040
+2025-10-08 19:42:35.643 [server.ServerMain.main()] WARN  server.network.Server - Error reading from client java.nio.channels.SocketChannel[connected local=/127.0.0.1:8080 remote=/127.0.0.1:65040]: Client disconnected
+2025-10-08 19:42:35.643 [server.ServerMain.main()] INFO  server.network.Server - Closing connection to client: /127.0.0.1:65040
+2025-10-08 19:42:38.521 [Thread-2] INFO  server.ServerMain - Shutting down server...
+2025-10-08 19:42:38.521 [Thread-2] INFO  server.network.Server - Stopping server...
+2025-10-08 19:46:24.368 [server.ServerMain.main()] INFO  server.ServerMain - Collection loaded with 2 items
+2025-10-08 19:46:24.368 [server.ServerMain.main()] INFO  server.ServerMain - Collection init: Id 1: Validation succeeded.
+2025-10-08 19:46:24.368 [server.ServerMain.main()] INFO  server.ServerMain - Collection init: Id 3: Validation succeeded.
+2025-10-08 19:46:24.368 [server.ServerMain.main()] INFO  server.ServerMain - Starting server on port 8080
+2025-10-08 19:46:24.368 [server.ServerMain.main()] INFO  server.network.Server - Starting server on port 8080
+2025-10-08 19:46:24.513 [server.ServerMain.main()] INFO  server.network.Server - Server started successfully on port 8080
+2025-10-08 19:46:33.200 [server.ServerMain.main()] INFO  server.network.Server - New client connected: /127.0.0.1:65235
+2025-10-08 19:47:24.424 [server.ServerMain.main()] WARN  server.network.Server - Error reading from client java.nio.channels.SocketChannel[connected local=/127.0.0.1:8080 remote=/127.0.0.1:65235]: Client disconnected
+2025-10-08 19:47:24.424 [server.ServerMain.main()] INFO  server.network.Server - Closing connection to client: /127.0.0.1:65235
+2025-10-08 19:47:27.029 [Thread-2] INFO  server.ServerMain - Shutting down server...
+2025-10-08 19:47:27.029 [Thread-2] INFO  server.network.Server - Stopping server...

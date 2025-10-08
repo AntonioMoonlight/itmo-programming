@@ -1,7 +1,7 @@
 package server.command;
 
 import server.CommandManager;
-import server.CommandResponse;
+import common.Response;
 
 import java.util.Map;
 
@@ -13,7 +13,8 @@ public class Help extends Command {
         this.commandManager = commandManager;
     }
 
-    public CommandResponse execute(String[] args) {
+    @Override
+    public Response execute(String[] args) {
         Map<String, Command> registry = commandManager.getRegistry();
 
         int maxNameLength = registry.values().stream()
@@ -53,6 +54,6 @@ public class Help extends Command {
         }
         output.append(border);
 
-        return new CommandResponse(true, output.toString());
+        return new Response(true, output.toString());
     }
 }

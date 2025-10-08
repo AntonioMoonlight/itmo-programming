@@ -286,4 +286,8 @@ public class Server {
             return false; // Write incomplete
         }
     }
+
+    public RequestProcessor getRequestProcessor() {
+        return requestProcessor;
+    }
 }
