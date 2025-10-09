@@ -235,3 +235,27 @@ java.lang.NegativeArraySizeException: -1393754107
 2025-10-08 19:47:24.424 [server.ServerMain.main()] INFO  server.network.Server - Closing connection to client: /127.0.0.1:65235
 2025-10-08 19:47:27.029 [Thread-2] INFO  server.ServerMain - Shutting down server...
 2025-10-08 19:47:27.029 [Thread-2] INFO  server.network.Server - Stopping server...
+2025-10-08 19:56:53.622 [server.ServerMain.main()] INFO  server.ServerMain - Collection loaded with 2 items
+2025-10-08 19:56:53.622 [server.ServerMain.main()] INFO  server.ServerMain - Collection init: Id 1: Validation succeeded.
+2025-10-08 19:56:53.622 [server.ServerMain.main()] INFO  server.ServerMain - Collection init: Id 3: Validation succeeded.
+2025-10-08 19:56:53.622 [server.ServerMain.main()] INFO  server.ServerMain - Starting server on port 8080
+2025-10-08 19:56:53.622 [server.ServerMain.main()] INFO  server.network.Server - Starting server on port 8080
+2025-10-08 19:56:53.798 [server.ServerMain.main()] INFO  server.network.Server - Server started successfully on port 8080
+2025-10-08 19:57:01.191 [server.ServerMain.main()] INFO  server.network.Server - New client connected: /127.0.0.1:65452
+2025-10-08 19:57:04.034 [server.ServerMain.main()] INFO  server.network.Server - Received request: help from /127.0.0.1:65452
+2025-10-08 19:57:04.051 [server.ServerMain.main()] INFO  server.network.Server - Response sent to /127.0.0.1:65452
+2025-10-08 19:57:06.847 [Thread-2] INFO  server.ServerMain - Shutting down server...
+2025-10-08 19:57:06.847 [Thread-2] INFO  server.network.Server - Stopping server...
+2025-10-08 19:57:23.616 [server.ServerMain.main()] INFO  server.ServerMain - Collection loaded with 2 items
+2025-10-08 19:57:23.616 [server.ServerMain.main()] INFO  server.ServerMain - Collection init: Id 1: Validation succeeded.
+2025-10-08 19:57:23.616 [server.ServerMain.main()] INFO  server.ServerMain - Collection init: Id 3: Validation succeeded.
+2025-10-08 19:57:23.626 [server.ServerMain.main()] INFO  server.ServerMain - Starting server on port 8080
+2025-10-08 19:57:23.626 [server.ServerMain.main()] INFO  server.network.Server - Starting server on port 8080
+2025-10-08 19:57:23.833 [server.ServerMain.main()] INFO  server.network.Server - Server started successfully on port 8080
+2025-10-08 19:57:26.927 [server.ServerMain.main()] INFO  server.network.Server - New client connected: /127.0.0.1:65456
+2025-10-08 19:57:26.947 [server.ServerMain.main()] INFO  server.network.Server - Received request: help from /127.0.0.1:65456
+2025-10-08 19:57:26.952 [server.ServerMain.main()] INFO  server.network.Server - Response sent to /127.0.0.1:65456
+2025-10-08 19:57:29.481 [server.ServerMain.main()] WARN  server.network.Server - Error reading from client java.nio.channels.SocketChannel[connected local=/127.0.0.1:8080 remote=/127.0.0.1:65456]: Client disconnected
+2025-10-08 19:57:29.481 [server.ServerMain.main()] INFO  server.network.Server - Closing connection to client: /127.0.0.1:65456
+2025-10-08 19:57:32.774 [Thread-2] INFO  server.ServerMain - Shutting down server...
+2025-10-08 19:57:32.774 [Thread-2] INFO  server.network.Server - Stopping server...

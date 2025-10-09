@@ -1,0 +1,44 @@
+2025-10-08 20:08:42.711 [main] INFO  server.ServerMain - Collection loaded with 0 items
+2025-10-08 20:08:42.717 [main] INFO  server.ServerMain - Starting server on port 8080
+2025-10-08 20:08:42.717 [main] INFO  server.network.Server - Starting server on port 8080
+2025-10-08 20:08:42.923 [main] INFO  server.network.Server - Server started successfully on port 8080
+2025-10-08 20:08:59.734 [main] INFO  server.network.Server - New client connected: /127.0.0.1:49822
+2025-10-08 20:09:08.329 [main] INFO  server.network.Server - Received request: info from /127.0.0.1:49822
+2025-10-08 20:09:08.338 [main] INFO  server.network.Server - Response sent to /127.0.0.1:49822
+2025-10-08 20:09:19.100 [main] WARN  server.network.Server - Error reading from client java.nio.channels.SocketChannel[connected local=/127.0.0.1:8080 remote=/127.0.0.1:49822]: Client disconnected
+2025-10-08 20:09:19.115 [main] INFO  server.network.Server - Closing connection to client: /127.0.0.1:49822
+2025-10-08 20:13:01.636 [Thread-0] INFO  server.ServerMain - Shutting down server...
+2025-10-08 20:13:01.637 [Thread-0] INFO  server.network.Server - Stopping server...
+2025-10-08 20:13:12.300 [main] INFO  server.ServerMain - Collection loaded with 0 items
+2025-10-08 20:13:12.316 [main] INFO  server.ServerMain - Starting server on port 9090
+2025-10-08 20:13:12.316 [main] INFO  server.network.Server - Starting server on port 9090
+2025-10-08 20:13:12.500 [main] INFO  server.network.Server - Server started successfully on port 9090
+2025-10-08 20:13:17.696 [main] INFO  server.network.Server - New client connected: /127.0.0.1:49863
+2025-10-08 20:13:21.936 [main] INFO  server.network.Server - Received request: info from /127.0.0.1:49863
+2025-10-08 20:13:21.954 [main] INFO  server.network.Server - Response sent to /127.0.0.1:49863
+2025-10-08 20:13:24.058 [main] WARN  server.network.Server - Error reading from client java.nio.channels.SocketChannel[connected local=/127.0.0.1:9090 remote=/127.0.0.1:49863]: Client disconnected
+2025-10-08 20:13:24.058 [main] INFO  server.network.Server - Closing connection to client: /127.0.0.1:49863
+2025-10-08 20:13:41.073 [main] INFO  server.network.Server - New client connected: /127.0.0.1:49864
+2025-10-08 20:13:44.996 [main] INFO  server.network.Server - Received request: show from /127.0.0.1:49864
+2025-10-08 20:13:45.002 [main] INFO  server.network.Server - Response sent to /127.0.0.1:49864
+2025-10-08 20:14:33.438 [Thread-0] INFO  server.ServerMain - Shutting down server...
+2025-10-08 20:14:33.438 [Thread-0] INFO  server.network.Server - Stopping server...
+2025-10-08 20:14:38.302 [main] INFO  server.ServerMain - Collection loaded with 0 items
+2025-10-08 20:14:38.317 [main] INFO  server.ServerMain - Starting server on port 9090
+2025-10-08 20:14:38.317 [main] INFO  server.network.Server - Starting server on port 9090
+2025-10-08 20:14:38.498 [main] INFO  server.network.Server - Server started successfully on port 9090
+2025-10-08 20:14:53.580 [Thread-0] INFO  server.ServerMain - Shutting down server...
+2025-10-08 20:14:53.580 [Thread-0] INFO  server.network.Server - Stopping server...
+2025-10-08 20:15:33.750 [main] INFO  server.ServerMain - Collection loaded with 2 items
+2025-10-08 20:15:33.766 [main] INFO  server.ServerMain - Collection init: Id 1: Validation succeeded.
+2025-10-08 20:15:33.766 [main] INFO  server.ServerMain - Collection init: Id 3: Validation succeeded.
+2025-10-08 20:15:33.766 [main] INFO  server.ServerMain - Starting server on port 9090
+2025-10-08 20:15:33.766 [main] INFO  server.network.Server - Starting server on port 9090
+2025-10-08 20:15:33.944 [main] INFO  server.network.Server - Server started successfully on port 9090
+2025-10-08 20:15:41.831 [main] INFO  server.network.Server - New client connected: /127.0.0.1:49885
+2025-10-08 20:15:44.025 [main] INFO  server.network.Server - Received request: show from /127.0.0.1:49885
+2025-10-08 20:15:44.044 [main] INFO  server.network.Server - Response sent to /127.0.0.1:49885
+2025-10-08 20:15:47.029 [main] WARN  server.network.Server - Error reading from client java.nio.channels.SocketChannel[connected local=/127.0.0.1:9090 remote=/127.0.0.1:49885]: Client disconnected
+2025-10-08 20:15:47.030 [main] INFO  server.network.Server - Closing connection to client: /127.0.0.1:49885
+2025-10-08 20:15:49.312 [Thread-0] INFO  server.ServerMain - Shutting down server...
+2025-10-08 20:15:49.312 [Thread-0] INFO  server.network.Server - Stopping server...

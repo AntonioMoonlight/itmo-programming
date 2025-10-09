@@ -4,6 +4,7 @@ client\ConsoleView.class
 server\network\Server.class
 server\command\Command.class
 server\IdGenerator.class
+server\command\ExecuteScript.class
 server\command\History.class
 client\StdInSource.class
 server\CollectionManager.class
