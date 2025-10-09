@@ -3,10 +3,7 @@ package server;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import server.network.Server;
-import server.network.RequestProcessor;
 import server.command.*;
-import client.ElementBuilder;
-import client.StdInSource;
 import client.ConsoleView;
 
 import java.io.IOException;
@@ -14,9 +11,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
-/**
- * Server application main class
- */
 public class ServerMain {
     private static final Logger logger = LogManager.getLogger(ServerMain.class);
     private static final int DEFAULT_PORT = 8080;
@@ -24,7 +18,6 @@ public class ServerMain {
     public static void main(String[] args) {
         int port = DEFAULT_PORT;
         
-        // Parse command line arguments
         if (args.length > 0) {
             try {
                 port = Integer.parseInt(args[0]);
@@ -36,7 +29,6 @@ public class ServerMain {
         }
 
         try {
-            // Initialize server components
             String envName = "DATA_FILE";
             String dataFileEnv = System.getenv(envName);
             if (dataFileEnv == null || dataFileEnv.trim().isEmpty()) {
@@ -49,24 +41,18 @@ public class ServerMain {
             ConsoleView consoleView = new ConsoleView(System.out);
             CollectionManager collectionManager = new CollectionManager();
             FileManager fileManager = new FileManager(dataFilePath, collectionManager, consoleView);
-            ElementBuilder elementBuilder = new ElementBuilder(consoleView, StdInSource.INSTANCE);
             CommandManager commandManager = new CommandManager();
 
-            // Register server commands
-            registerCommands(commandManager, collectionManager, fileManager, elementBuilder, consoleView);
+            registerCommands(commandManager, collectionManager, fileManager);
 
-            // Load collection from file
             List<String> messages = collectionManager.init(fileManager.readCollection());
             logger.info("Collection loaded with {} items", collectionManager.getDeque().size());
             messages.forEach(msg -> logger.info("Collection init: {}", msg));
 
-            // Start server
             Server server = new Server(port, commandManager, collectionManager);
             
-            // Register ExecuteScript command after server is created (so we have access to RequestProcessor)
             commandManager.register(new ExecuteScript(server.getRequestProcessor()));
             
-            // Add shutdown hook to save collection
             Runtime.getRuntime().addShutdownHook(new Thread(() -> {
                 logger.info("Shutting down server...");
                 server.stop();
@@ -92,8 +78,8 @@ public class ServerMain {
         }
     }
 
-    private static void registerCommands(CommandManager commandManager, CollectionManager collectionManager, 
-                                       FileManager fileManager, ElementBuilder elementBuilder, ConsoleView consoleView) {
+    private static void registerCommands(CommandManager commandManager, CollectionManager collectionManager,
+                                       FileManager fileManager) {
         
         commandManager.register(new Help(commandManager));
         commandManager.register(new History(commandManager));
@@ -108,6 +94,6 @@ public class ServerMain {
         commandManager.register(new CountByLabel(collectionManager));
         commandManager.register(new FilterLessThanGenre(collectionManager));
         commandManager.register(new Info(collectionManager));
-        commandManager.register(new Save(fileManager)); // Server-only command
+        //commandManager.register(new Save(fileManager));
     }
 }

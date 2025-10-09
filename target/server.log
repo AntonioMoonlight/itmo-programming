@@ -42,3 +42,17 @@
 2025-10-08 20:15:47.030 [main] INFO  server.network.Server - Closing connection to client: /127.0.0.1:49885
 2025-10-08 20:15:49.312 [Thread-0] INFO  server.ServerMain - Shutting down server...
 2025-10-08 20:15:49.312 [Thread-0] INFO  server.network.Server - Stopping server...
+2025-10-10 01:22:42.149 [main] INFO  server.ServerMain - Collection loaded with 0 items
+2025-10-10 01:22:42.155 [main] INFO  server.ServerMain - Starting server on port 8080
+2025-10-10 01:22:42.155 [main] INFO  server.network.Server - Starting server on port 8080
+2025-10-10 01:22:42.362 [main] INFO  server.network.Server - Server started successfully on port 8080
+2025-10-10 01:23:05.317 [main] INFO  server.network.Server - New client connected: /127.0.0.1:53548
+2025-10-10 01:23:14.796 [Thread-0] INFO  server.ServerMain - Shutting down server...
+2025-10-10 01:23:14.796 [Thread-0] INFO  server.network.Server - Stopping server...
+2025-10-10 01:23:31.763 [main] INFO  server.ServerMain - Collection loaded with 0 items
+2025-10-10 01:23:31.763 [main] INFO  server.ServerMain - Starting server on port 8080
+2025-10-10 01:23:31.778 [main] INFO  server.network.Server - Starting server on port 8080
+2025-10-10 01:23:31.986 [main] INFO  server.network.Server - Server started successfully on port 8080
+2025-10-10 01:23:38.771 [main] INFO  server.network.Server - New client connected: /127.0.0.1:53552
+2025-10-10 01:23:38.784 [main] INFO  server.network.Server - Received request: help from /127.0.0.1:53552
+2025-10-10 01:23:38.784 [main] INFO  server.network.Server - Response sent to /127.0.0.1:53552

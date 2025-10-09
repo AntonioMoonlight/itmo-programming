@@ -11,6 +11,7 @@ import common.Response;
 import common.MusicBand;
 import client.ElementBuilder;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -38,35 +39,29 @@ public class RequestProcessor {
                 return new Response(false, "Unknown command: " + request.getCommandName());
             }
 
-            // Execute command with proper delegation
             Response response;
             if (needsMusicBandData(request.getCommandName()) && request.getData() instanceof MusicBand) {
-                // Execute command with MusicBand data for commands that need it
+
                 response = command.validateAndExecute(request.getArguments(), (MusicBand) request.getData());
             } else if ("execute_script".equals(request.getCommandName()) && request.getData() instanceof String) {
-                // Handle ExecuteScript with script content as String data
+
                 ExecuteScript executeScript = (ExecuteScript) command;
                 response = executeScript.executeScript(request.getArguments(), (String) request.getData());
             } else {
-                // Execute command normally
+
                 response = command.validateAndExecute(request.getArguments());
             }
             
-            // Add command to history
             if (response.isSuccess()) {
                 commandManager.getHistory().addFirst(command.getName());
             }
 
-            // For commands that return collection data, include sorted collection
             if (isCollectionCommand(request.getCommandName()) && response.isSuccess()) {
                 List<MusicBand> sortedCollection = collectionManager.getDeque().stream()
-                    .sorted((b1, b2) -> {
-                        // Sort by coordinates (x, then y)
-                        int coordCompare = Double.compare(b1.getCoordinates().getX(), b2.getCoordinates().getX());
-                        if (coordCompare != 0) return coordCompare;
-                        return Double.compare(b1.getCoordinates().getY(), b2.getCoordinates().getY());
-                    })
-                    .collect(Collectors.toList());
+                    .sorted(Comparator.comparingDouble(
+                            (MusicBand b) -> b.getCoordinates().getX())
+                            .thenComparingInt(b -> b.getCoordinates().getY()))
+                        .collect(Collectors.toList());
                 
                 response = new Response(response.isSuccess(), response.getMessage(), sortedCollection);
             }
@@ -89,9 +84,6 @@ public class RequestProcessor {
                "remove_lower".equals(commandName);
     }
 
-    /**
-     * Determines if a command returns collection data that should be sent to client
-     */
     private boolean isCollectionCommand(String commandName) {
         return "show".equals(commandName) || 
                "head".equals(commandName) ||

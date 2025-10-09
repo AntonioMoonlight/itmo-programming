@@ -8,10 +8,7 @@ import java.net.ConnectException;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
 
-/**
- * TCP Client using IO streams to communicate with server
- * Handles connection management, request sending, and response receiving
- */
+
 public class Client {
     private final String serverHost;
     private final int serverPort;
@@ -22,7 +19,7 @@ public class Client {
     private boolean connected = false;
 
     public Client(String serverHost, int serverPort) {
-        this(serverHost, serverPort, 5000, 10000); // 5s connection, 10s read timeout
+        this(serverHost, serverPort, 5000, 10000);
     }
 
     public Client(String serverHost, int serverPort, int connectionTimeout, int readTimeout) {
@@ -32,12 +29,9 @@ public class Client {
         this.readTimeout = readTimeout;
     }
 
-    /**
-     * Establishes connection to the server
-     */
     public void connect() throws IOException {
         if (connected) {
-            return; // Already connected
+            return;
         }
 
         try {
@@ -54,17 +48,13 @@ public class Client {
             throw new IOException("Connection timeout", e);
         }
     }
-
-    /**
-     * Sends a request to the server and returns the response
-     */
+    // Sends a length-prefixed request
     public Response sendRequest(Request request) throws IOException {
         if (!connected) {
             throw new IOException("Not connected to server");
         }
 
         try {
-            // Serialize request to byte array first
             byte[] requestData;
             try (ByteArrayOutputStream baos = new ByteArrayOutputStream();
                  ObjectOutputStream oos = new ObjectOutputStream(baos)) {
@@ -73,21 +63,19 @@ public class Client {
                 requestData = baos.toByteArray();
             }
             
-            // Send length prefix followed by data
+            // Send prefixed request
             DataOutputStream dos = new DataOutputStream(socket.getOutputStream());
             dos.writeInt(requestData.length);
             dos.write(requestData);
             dos.flush();
             
-            // Read response length prefix
+            // Receive and read response
             DataInputStream dis = new DataInputStream(socket.getInputStream());
             int responseLength = dis.readInt();
             
-            // Read response data
             byte[] responseData = new byte[responseLength];
             dis.readFully(responseData);
             
-            // Deserialize response
             try (ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(responseData))) {
                 Object responseObj = ois.readObject();
                 if (!(responseObj instanceof Response)) {
@@ -101,7 +89,6 @@ public class Client {
         } catch (SocketTimeoutException e) {
             throw new IOException("Server response timeout", e);
         } catch (IOException e) {
-            // Connection might be broken
             connected = false;
             throw new IOException("Communication error: " + e.getMessage(), e);
         }
@@ -139,15 +126,13 @@ public class Client {
             if (socket != null) {
                 socket.close();
             }
-        } catch (IOException e) {
-            // Ignore
-        }
+        } catch (IOException ignored) {}
         
         socket = null;
     }
 
     /**
-     * Sends request with automatic retry logic for handling server unavailability
+     * Sends request with automatic retry logic
      */
     public Response sendRequestWithRetry(Request request, int maxRetries, long retryDelayMs) throws IOException {
         IOException lastException = null;

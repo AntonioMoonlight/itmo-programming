@@ -2,9 +2,7 @@ package client;
 
 import client.network.Client;
 
-/**
- * Client application main class
- */
+
 public class ClientMain {
     private static final String DEFAULT_HOST = "localhost";
     private static final int DEFAULT_PORT = 8080;
@@ -12,8 +10,7 @@ public class ClientMain {
     public static void main(String[] args) {
         String serverHost = DEFAULT_HOST;
         int serverPort = DEFAULT_PORT;
-        
-        // Parse command line arguments
+
         if (args.length >= 1) {
             serverHost = args[0];
         }
@@ -31,14 +28,12 @@ public class ClientMain {
         System.out.println("Connecting to server at " + serverHost + ":" + serverPort);
         
         try {
-            // Initialize client components
             ConsoleView consoleView = new ConsoleView(System.out);
             Client networkClient = new Client(serverHost, serverPort);
             ElementBuilder elementBuilder = new ElementBuilder(consoleView, StdInSource.INSTANCE);
             
             NetworkAppController appController = new NetworkAppController(elementBuilder, consoleView, networkClient);
             
-            // Start client
             appController.run(StdInSource.INSTANCE);
             
         } catch (Exception e) {
