@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class Request implements Serializable {
     private final String commandName;
     private final String[] arguments;
-    private final Object data; // For commands that need to send objects (like MusicBand)
+    private final Object data;
 
     public Request(String commandName, String[] arguments) {
         this.commandName = commandName;

@@ -3,17 +3,12 @@ package server.network;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import server.CommandManager;
-import server.CollectionManager;
 import server.command.Command;
 import server.command.ExecuteScript;
 import common.Request;
 import common.Response;
 import common.MusicBand;
 import client.ElementBuilder;
-
-import java.util.Comparator;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Processes incoming requests and converts them to responses
@@ -22,11 +17,9 @@ public class RequestProcessor {
     private static final Logger logger = LogManager.getLogger(RequestProcessor.class);
     
     private final CommandManager commandManager;
-    private final CollectionManager collectionManager;
 
-    public RequestProcessor(CommandManager commandManager, CollectionManager collectionManager) {
+    public RequestProcessor(CommandManager commandManager) {
         this.commandManager = commandManager;
-        this.collectionManager = collectionManager;
     }
 
     public Response processRequest(Request request) {
@@ -56,16 +49,6 @@ public class RequestProcessor {
                 commandManager.getHistory().addFirst(command.getName());
             }
 
-            if (isCollectionCommand(request.getCommandName()) && response.isSuccess()) {
-                List<MusicBand> sortedCollection = collectionManager.getDeque().stream()
-                    .sorted(Comparator.comparingDouble(
-                            (MusicBand b) -> b.getCoordinates().getX())
-                            .thenComparingInt(b -> b.getCoordinates().getY()))
-                        .collect(Collectors.toList());
-                
-                response = new Response(response.isSuccess(), response.getMessage(), sortedCollection);
-            }
-
             logger.debug("Request processed successfully: {}", request.getCommandName());
             return response;
             
@@ -82,11 +65,5 @@ public class RequestProcessor {
         return "add".equals(commandName) || 
                "update_by_id".equals(commandName) || 
                "remove_lower".equals(commandName);
-    }
-
-    private boolean isCollectionCommand(String commandName) {
-        return "show".equals(commandName) || 
-               "head".equals(commandName) ||
-               "filter_less_than_genre".equals(commandName);
     }
 }
