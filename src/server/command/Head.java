@@ -4,6 +4,8 @@ import server.CollectionManager;
 import common.Response;
 import client.ElementBuilder;
 
+import java.util.List;
+
 public class Head extends Command {
 
     private final CollectionManager collectionManager;
@@ -21,6 +23,6 @@ public class Head extends Command {
             return new Response(false, "The collection is empty.");
         }
 
-        return new Response(true, "First element:\n" + firstElement.toString());
+        return new Response(true, "First element:", List.of(firstElement));
     }
 }

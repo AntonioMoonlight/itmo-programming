@@ -26,7 +26,7 @@ public class FilterLessThanGenre extends Command {
                 return new Response(true, "No elements found with genre less than " + genre);
             }
             
-            return new Response(true, "Elements with genre less than " + genre + ":");
+            return new Response(true, "Elements with genre less than " + genre + ":", filtered);
         } catch (IllegalArgumentException e) {
             return new Response(false, "Invalid genre. Allowed genres: " + MusicGenre.allowed);
         }

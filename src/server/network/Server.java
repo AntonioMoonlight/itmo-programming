@@ -32,7 +32,7 @@ public class Server {
 
     public Server(int port, CommandManager commandManager, CollectionManager collectionManager) {
         this.port = port;
-        this.requestProcessor = new RequestProcessor(commandManager, collectionManager);
+        this.requestProcessor = new RequestProcessor(commandManager);
     }
 
     public void start() throws IOException {
