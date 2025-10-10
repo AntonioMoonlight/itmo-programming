@@ -14,8 +14,7 @@ import java.nio.channels.*;
 import java.util.*;
 
 /**
- * TCP Server using NIO non-blocking channels
- * Handles client connections and processes requests in single-threaded mode
+ * Handles client connections and processes requests in a single thread
  */
 public class Server {
     private static final Logger logger = LogManager.getLogger(Server.class);
@@ -28,7 +27,7 @@ public class Server {
     private Selector selector;
     private volatile boolean running = false;
     
-    // Client state management
+
     private final Map<SocketChannel, ClientHandler> clients = new HashMap<>();
 
     public Server(int port, CommandManager commandManager, CollectionManager collectionManager) {
@@ -54,11 +53,10 @@ public class Server {
     private void run() {
         while (running) {
             try {
-                // Wait for events with timeout
                 int readyChannels = selector.select(1000);
                 
                 if (readyChannels == 0) {
-                    continue; // Timeout, check if still running
+                    continue;
                 }
 
                 Set<SelectionKey> selectedKeys = selector.selectedKeys();
@@ -84,7 +82,7 @@ public class Server {
                 logger.error("Error in server main loop", e);
                 if (running) {
                     try {
-                        Thread.sleep(100); // Brief pause before retry
+                        Thread.sleep(100);
                     } catch (InterruptedException ie) {
                         Thread.currentThread().interrupt();
                         break;
@@ -120,11 +118,9 @@ public class Server {
                 logger.info("Received request: {} from {}", request.getCommandName(), 
                            clientChannel.getRemoteAddress());
                 
-                // Process request and prepare response
                 Response response = requestProcessor.processRequest(request);
                 clientHandler.queueResponse(response);
                 
-                // Switch to write mode
                 key.interestOps(SelectionKey.OP_WRITE);
             }
         } catch (IOException e) {
@@ -132,7 +128,7 @@ public class Server {
             closeClient(clientChannel, key);
         } catch (ClassNotFoundException e) {
             logger.error("Error deserializing request from client {}", clientChannel, e);
-            // Send error response
+
             Response errorResponse = new Response(false, "Invalid request format");
             clientHandler.queueResponse(errorResponse);
             key.interestOps(SelectionKey.OP_WRITE);
@@ -147,7 +143,7 @@ public class Server {
             boolean writeComplete = clientHandler.writeResponse();
             if (writeComplete) {
                 logger.info("Response sent to {}", clientChannel.getRemoteAddress());
-                // Switch back to read mode
+
                 key.interestOps(SelectionKey.OP_READ);
             }
         } catch (IOException e) {
@@ -172,7 +168,7 @@ public class Server {
         running = false;
         
         try {
-            // Close all client connections
+
             for (SocketChannel client : new ArrayList<>(clients.keySet())) {
                 client.close();
             }
@@ -212,7 +208,7 @@ public class Server {
             }
             
             if (bytesRead == 0) {
-                return null; // No data available yet
+                return null;
             }
 
             readBuffer.flip();
@@ -245,16 +241,16 @@ public class Server {
             }
             
             readBuffer.compact();
-            return null; // Incomplete request
+            return null;
         }
 
         public void queueResponse(Response response) {
             this.queuedResponse = response;
         }
-
+        // positive if successful, false if response is partial
         public boolean writeResponse() throws IOException {
             if (queuedResponse == null) {
-                return true; // Nothing to write
+                return true;
             }
 
             if (writeBuffer.position() == 0) {
@@ -277,7 +273,6 @@ public class Server {
             channel.write(writeBuffer);
             
             if (!writeBuffer.hasRemaining()) {
-                // Write complete
                 writeBuffer.clear();
                 queuedResponse = null;
                 return true;
