@@ -25,7 +25,7 @@ public class Server {
     
     private ServerSocketChannel serverChannel;
     private Selector selector;
-    private volatile boolean running = false;
+    private boolean running = false;
     
 
     private final Map<SocketChannel, ClientHandler> clients = new HashMap<>();

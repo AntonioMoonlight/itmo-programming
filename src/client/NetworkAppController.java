@@ -72,19 +72,16 @@ public class NetworkAppController {
         ParsedCommand parsedCommand = parse(line);
         String commandName = parsedCommand.name();
         
-        // Handle client-side commands
         if (clientOnlyCommands.contains(commandName)) {
             handleClientCommand(parsedCommand);
             return;
         }
         
-        // Handle exit command
         if ("exit".equals(commandName)) {
             stop();
             return;
         }
         
-        // Check for server-only commands
         if (serverOnlyCommands.contains(commandName)) {
             consoleView.println("Command '" + commandName + "' is not available on client side.");
             return;
@@ -95,7 +92,6 @@ public class NetworkAppController {
     }
 
     private void handleClientCommand(ParsedCommand parsedCommand) {
-        // No more client-only commands since execute_script is now handled by server
         consoleView.println("Unknown client command: " + parsedCommand.name());
     }
 
@@ -121,10 +117,8 @@ public class NetworkAppController {
                 try {
                     addActiveScript(fileName);
                     
-                    // Read the script file content with nested script resolution
                     String scriptContent = readScriptWithNested(fileName);
                     
-                    // Send script content to server
                     request = new Request(parsedCommand.name(), parsedCommand.args(), scriptContent);
                     
                 } catch (Exception e) {
@@ -135,7 +129,6 @@ public class NetworkAppController {
                 }
                 
             } else if (needsObjectData(parsedCommand.name())) {
-                // For commands that need object data (like add, update), get the object first
                 MusicBand musicBand = elementBuilder.buildMusicBand();
                 request = new Request(parsedCommand.name(), parsedCommand.args(), musicBand);
             } else {
